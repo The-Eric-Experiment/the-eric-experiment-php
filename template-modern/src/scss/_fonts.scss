@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "perfect_dos_vga_437regular";
+  src: url("/templates/modern/public/dos/perfect_dos_vga_437-webfont.woff2")
+      format("woff2"),
+    url("/templates/modern/public/dos/perfect_dos_vga_437-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ms_sans_serifregular";
+  src: url("/templates/modern/public/sans/ms_sans_serif-webfont.woff2")
+      format("woff2"),
+    url("/templates/modern/public/sans/ms_sans_serif-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}

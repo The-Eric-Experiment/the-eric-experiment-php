@@ -1,0 +1,22 @@
+.gallery-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  > a {
+    padding: 0.25rem;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.15);
+
+    > img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+}
+
+.light-gallery__modal {
+  z-index: 99999 !important;
+}

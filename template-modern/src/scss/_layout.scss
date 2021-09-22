@@ -1,0 +1,201 @@
+body {
+  background-color: #000;
+  background-image: url($page-background);
+  background-repeat: repeat;
+}
+
+h1 {
+  font-size: $font-size-900;
+  @include tablet {
+    font-size: $font-size-1100;
+  }
+  font-weight: $font-weight-medium;
+  line-height: 2.25rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: $font-size-800;
+  @include tablet {
+    font-size: $font-size-900;
+  }
+  font-weight: $font-weight-medium;
+  line-height: 2rem;
+  margin: 0;
+}
+
+h3 {
+  font-size: $font-size-700;
+  @include tablet {
+    font-size: $font-size-800;
+  }
+  font-weight: $font-weight-medium;
+  line-height: 1.75rem;
+  margin: 0;
+}
+
+h4 {
+  font-size: $font-size-600;
+  @include tablet {
+    font-size: $font-size-700;
+  }
+  font-weight: $font-weight-medium;
+  line-height: 1.5rem;
+  margin: 0;
+}
+
+p {
+  font-size: $font-size-600;
+  font-weight: $font-weight-regular;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#page {
+  margin-top: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  img {
+    max-width: 100%;
+  }
+
+  @include tablet {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  > .content {
+    flex: 1;
+    .title {
+      background-color: transparent;
+      text-decoration: none;
+      border-bottom: 0;
+    }
+
+    @include tablet {
+      &:not(:first-child) {
+        padding-left: 1.5rem;
+      }
+      &:not(:last-child) {
+        padding-right: 1.5rem;
+      }
+    }
+  }
+}
+
+#website {
+  max-width: 75rem;
+  margin: auto;
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  #logo-container {
+    flex: 1;
+
+    #logo {
+      width: 80%;
+
+      @include tablet {
+        width: auto;
+      }
+    }
+  }
+}
+
+.side-content {
+  padding: 0.5rem;
+  padding-right: 0;
+  padding-left: 0;
+  @include tablet {
+    width: 25%;
+    padding-left: 0.5rem;
+  }
+
+  .heading {
+    background-color: $main-orange;
+    color: #fff;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-500;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .window-border {
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+footer {
+  color: #ffffff;
+
+  .footer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .footer-row-crazy-separator {
+    margin-top: 1rem;
+    width: 100%;
+    background: url(/templates/modern/public/flamingline.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 20px;
+    background-position-y: bottom;
+    position: relative;
+
+    .right {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1rem;
+    }
+
+    .left {
+      float: left;
+      left: 1rem;
+    }
+  }
+
+  h4 {
+    color: #fff;
+    font-weight: $font-weight-bold;
+    font-size: 2rem;
+  }
+
+  #tags {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .tag {
+      color: $main-green;
+      text-decoration: none;
+      padding: 0.5rem;
+      font-size: $font-size-600;
+
+      &:hover {
+        background-color: $main-green;
+        color: $font-dark-grey;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "tee-retro-theme",
+  "version": "1.0.0",
+  "description": "Retro Theme for The Eric Experiment",
+  "main": "index.js",
+  "scripts": {
+    "remove:dist": "rimraf retro/",
+    "copy-php": "copyfiles -f src/**/*.php retro",
+    "copy-public": "cd src && copyfiles \"./public/**/*.*\" ../retro",
+    "build": "yarn remove:dist && yarn copy-php && yarn copy-public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericmackrodt/tee-modern-theme.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericmackrodt/tee-modern-theme/issues"
+  },
+  "homepage": "https://github.com/ericmackrodt/tee-modern-theme#readme",
+  "dependencies": {
+  },
+  "devDependencies": {}
+}

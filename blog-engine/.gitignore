@@ -103,7 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-output/
-retro/
-modern/
-build/
+templates/
+contents/
+
+custom_variant_selector.php

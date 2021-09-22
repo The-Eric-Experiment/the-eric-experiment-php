@@ -1,0 +1,72 @@
+$page-background: "/templates/modern/public/starfiel.gif";
+$header-image: "/templates/modern/public/header.jpg";
+$logo: "/templates/modern/public/logo.png";
+$size-landscape-phone: 36em;
+$size-tablet: 48em;
+$size-desktop: 62em;
+$size-large-desktop: 75em;
+$main-background: #000000;
+$secondary-background: #ffffff;
+$grey50: #fafafa;
+$grey100: #f5f5f5;
+$grey200: #e0e0e0;
+$grey300: #cdcdcd;
+$grey400: #a9a9a9;
+$grey500: #707070;
+$grey600: #424242;
+$grey900: #212121;
+
+$main-blue: #1238b3;
+$main-blue-lighter: #196aff;
+$main-orange: #ff9933;
+$main-green: #00ff00;
+$secondary-green: #008000;
+$main-pink: #bd0dff;
+$main-red: #ff300d;
+
+$font-size-base: 16px;
+$font-size-200: 0.5rem;
+$font-size-300: 0.7rem;
+$font-size-400: 0.8rem;
+$font-size-500: 0.875rem;
+$font-size-600: 1rem;
+$font-size-700: 1.3rem;
+$font-size-800: 1.5rem;
+$font-size-900: 1.8rem;
+$font-size-1000: 2rem;
+$font-size-1100: 2.5rem;
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+$font-weight-light: 300;
+$font-dark-grey: $grey900;
+$font-mid-grey: $grey500;
+$font-light-grey: $grey50;
+$font-family: "Roboto", sans-serif;
+$font-family-classic: "Times New Roman", Times, serif;
+$font-family-sans: "ms_sans_serifregular", $font-family;
+$font-family-dos: "perfect_dos_vga_437regular", $font-family;
+
+@mixin landscape-phone {
+  @media screen and (min-width: $size-landscape-phone) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $size-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $size-desktop) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media screen and (min-width: $size-large-desktop) {
+    @content;
+  }
+}
