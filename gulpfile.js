@@ -15,7 +15,7 @@ function empty() {
 }
 
 function configs() {
-  return src("./configs/*.php").pipe(dest(buildFolder));
+  return src(["./configs/*.*", "./configs/.htaccess"]).pipe(dest(buildFolder));
 }
 
 const build = series(
