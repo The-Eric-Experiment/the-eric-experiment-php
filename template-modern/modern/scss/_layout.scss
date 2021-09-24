@@ -92,24 +92,6 @@ p {
   padding-bottom: 0;
 }
 
-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  #logo-container {
-    flex: 1;
-
-    #logo {
-      width: 80%;
-
-      @include tablet {
-        width: auto;
-      }
-    }
-  }
-}
-
 .side-content {
   padding: 0.5rem;
   padding-right: 0;

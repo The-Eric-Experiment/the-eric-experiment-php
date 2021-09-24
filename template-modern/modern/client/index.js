@@ -25,17 +25,17 @@ function detachDocumentDismisser() {
 function attachDocumentDismisser() {
   $(window).on("click", function () {
     detachDocumentDismisser();
-    $(".mainmenu-content").removeClass("visible");
+    $(".main-menu-content.right").removeClass("visible");
   });
 }
 
-$(".mainmenu-content").on("click", function (event) {
+$(".main-menu-content.right").on("click", function (event) {
   event.stopPropagation();
 });
 
 $(".main-menu-mobile-button").on("click", function (event) {
   event.stopPropagation();
-  const $menu = $(this).siblings(".mainmenu-content");
+  const $menu = $(this).siblings(".main-menu-content.right");
   const hasClass = $menu.hasClass("visible");
   if (!hasClass) {
     attachDocumentDismisser();

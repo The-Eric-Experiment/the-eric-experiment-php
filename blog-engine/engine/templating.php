@@ -29,7 +29,7 @@ function addData($mainMenu, $variantFn = null)
     };
   }
 
-  $templates->addData(['mainMenu' => $mainMenu], $variantFn('main-menu'));
+  $templates->addData(['mainMenu' => $mainMenu], $variantFn('layout'));
   $templates->addData(['siteName' => $config["site-name"]], $variantFn('layout'));
   $templates->addData(['categories' => $categories], $variantFn('categories'));
   $templates->addData(['tags' =>  $tags], $variantFn('tags'));

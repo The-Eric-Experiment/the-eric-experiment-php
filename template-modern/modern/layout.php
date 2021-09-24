@@ -23,7 +23,7 @@
 <body>
     <div id="root">
         <div id="website">
-            <?php $this->insert('modern::page-header') ?>
+            <?php $this->insert('modern::page-header', ['mainMenu' => $mainMenu]) ?>
             <section id="page">
                 <?= $this->section('content') ?>
                 <?php if ($showSideContent) : ?>
