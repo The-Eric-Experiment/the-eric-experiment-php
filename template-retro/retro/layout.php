@@ -17,17 +17,7 @@ require_once getRequirePath("/engine/analytics.php");
 </head>
 
 <body bgcolor="#000000" text="#fffffff" background="/templates/retro/public/starfiel.gif" vlink="#00FF00" link="#00FF00">
-    <center>
-        <table cellspacing="2" cellpadding="0" border="0" width="610">
-            <tr>
-                <td valign="center"><a href="/"><img src="/templates/retro/public/logo-small.gif" alt="The Eric Experiment" border="0"></a></td>
-                <td align="right" valign="center"><?php $this->insert('retro::main-menu') ?></td>
-            </tr>
-        </table>
-        <br>
-        <img src="/templates/retro/public/anibar.gif">
-        <br>
-    </center>
+    <?php $this->insert('retro::page-header', ['mainMenu' => $mainMenu]) ?>
 
     <?= $this->section('content') ?>
 
