@@ -12,11 +12,6 @@
         <?php endif; ?>
     </title>
     <link rel="stylesheet" href="/templates/modern/css/modern.css" />
-    <script>
-        if (!!window.fetch && !window.location.protocol.includes("https") && !window.location.host.includes("localhost")) {
-            window.location = window.location.href.replace("http://", "https://")
-        }
-    </script>
     <?= $this->section('seo') ?>
 </head>
 
