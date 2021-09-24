@@ -11,12 +11,13 @@ try {
 }
 
 try {
-  // the code that throws an exception
   require 'vendor/autoload.php';
-  require 'engine/exceptions.php';
   require 'engine/helpers.php';
-  require 'engine/image-mapper.php';
+  require 'engine/exceptions.php';
+  require 'engine/browser-selector.php';
+  require 'engine/https-redirect.php';
   require 'engine/variant-selector.php';
+  require 'engine/image-mapper.php';
   require 'engine/file-loader.php';
   require 'engine/paginator.php';
   require 'engine/gallery-parser.php';
