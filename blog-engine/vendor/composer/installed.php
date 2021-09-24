@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1c67b555e08446c8fd37f950b4ee89a674296c0d',
+        'reference' => '58261de19942fa8f53007bce66df6c5ef43ebd8d',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1c67b555e08446c8fd37f950b4ee89a674296c0d',
+            'reference' => '58261de19942fa8f53007bce66df6c5ef43ebd8d',
             'dev_requirement' => false,
         ),
         'composer/ca-bundle' => array(

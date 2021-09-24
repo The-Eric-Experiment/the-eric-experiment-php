@@ -18,18 +18,6 @@ function buildStyles(destination) {
       .pipe(dest(path.join(destination, "./css")));
 }
 
-function copyPhp(destination) {
-  return () =>
-    src(path.join(__dirname, "./src/**/*.php")).pipe(dest(destination));
-}
-
-function copyPublic(destination) {
-  return () =>
-    src(path.join(__dirname, "./src/public/*.*")).pipe(
-      dest(path.join(destination, "./public"))
-    );
-}
-
 function buildClientJs(destination) {
   return () =>
     src(path.join(__dirname, "./src/client/index.js"))
@@ -67,12 +55,7 @@ function buildClientJs(destination) {
       .pipe(dest(path.join(destination, "./js")));
 }
 
-exports.build = function (destination) {
-  const templatePath = path.join(destination, "templates/modern");
-  return series(
-    copyPhp(templatePath),
-    buildStyles(templatePath),
-    copyPublic(templatePath),
-    buildClientJs(templatePath)
-  );
+exports.build = function () {
+  const templatePath = path.join(__dirname, "./src");
+  return series(buildStyles(templatePath), buildClientJs(templatePath));
 };

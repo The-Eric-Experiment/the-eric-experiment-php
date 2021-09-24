@@ -104,6 +104,10 @@ dist
 .tern-port
 
 output/
-retro/
-modern/
 build/
+template-modern/js
+template-modern/css
+blog-engine/custom_variant_selector.php
+blog-engine/config.php
+blog-engine/.htaccess
+blog-engine/robots.txt

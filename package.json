@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp",
+    "link-template-modern": "ln -s <path to the file/folder to be linked> <the path of the link to be created>",
+    "link-template-retro": "ln -s <path to the file/folder to be linked> <the path of the link to be created>",
+    "link-contents": "ln -s <path to the file/folder to be linked> <the path of the link to be created>",
+    "build-dev": "gulp --gulpfile gulpfile.dev.js"
   },
   "repository": {
     "type": "git",
