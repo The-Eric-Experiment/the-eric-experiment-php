@@ -105,9 +105,11 @@ dist
 
 output/
 build/
-template-modern/src/js
-template-modern/src/css
+template-modern/modern/js
+template-modern/modern/css
 blog-engine/custom_variant_selector.php
 blog-engine/config.php
 blog-engine/.htaccess
 blog-engine/robots.txt
+blog-engine/templates
+blog-engine/contents

@@ -7,7 +7,7 @@ const sass = require("gulp-sass")(require("sass"));
 
 function buildStyles(destination) {
   return () =>
-    src(path.join(__dirname, "./src/scss/index.scss"))
+    src(path.join(__dirname, "./modern/scss/index.scss"))
       .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
       .pipe(
         rename(function (path) {
@@ -20,19 +20,19 @@ function buildStyles(destination) {
 
 function copyPhp(destination) {
   return () =>
-    src(path.join(__dirname, "./src/**/*.php")).pipe(dest(destination));
+    src(path.join(__dirname, "./modern/**/*.php")).pipe(dest(destination));
 }
 
 function copyPublic(destination) {
   return () =>
-    src(path.join(__dirname, "./src/public/*.*")).pipe(
+    src(path.join(__dirname, "./modern/public/*.*")).pipe(
       dest(path.join(destination, "./public"))
     );
 }
 
 function buildClientJs(destination) {
   return () =>
-    src(path.join(__dirname, "./src/client/index.js"))
+    src(path.join(__dirname, "./modern/client/index.js"))
       .pipe(
         gulpWebpack(
           {

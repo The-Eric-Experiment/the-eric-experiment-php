@@ -7,7 +7,7 @@ const sass = require("gulp-sass")(require("sass"));
 
 function buildStyles(destination) {
   return () =>
-    src(path.join(__dirname, "./src/scss/index.scss"))
+    src(path.join(__dirname, "./modern/scss/index.scss"))
       .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
       .pipe(
         rename(function (path) {
@@ -20,7 +20,7 @@ function buildStyles(destination) {
 
 function buildClientJs(destination) {
   return () =>
-    src(path.join(__dirname, "./src/client/index.js"))
+    src(path.join(__dirname, "./modern/client/index.js"))
       .pipe(
         gulpWebpack(
           {
@@ -56,6 +56,6 @@ function buildClientJs(destination) {
 }
 
 exports.build = function () {
-  const templatePath = path.join(__dirname, "./src");
+  const templatePath = path.join(__dirname, "./modern");
   return series(buildStyles(templatePath), buildClientJs(templatePath));
 };

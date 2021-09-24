@@ -23,14 +23,7 @@
 <body>
     <div id="root">
         <div id="website">
-            <header>
-                <div id="logo-container">
-                    <a class="logo-link" href="/">
-                        <img id="logo" src="/templates/modern/public/logo.png" title="Logo" />
-                    </a>
-                </div>
-                <?php $this->insert('modern::main-menu') ?>
-            </header>
+            <?php $this->insert('modern::page-header') ?>
             <section id="page">
                 <?= $this->section('content') ?>
                 <?php if ($showSideContent) : ?>
