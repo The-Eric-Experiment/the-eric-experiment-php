@@ -25,7 +25,7 @@ function copyPhp(destination) {
 
 function copyPublic(destination) {
   return () =>
-    src(path.join(__dirname, "./modern/public/*.*")).pipe(
+    src(path.join(__dirname, "./modern/public/**/*.*")).pipe(
       dest(path.join(destination, "./public"))
     );
 }
