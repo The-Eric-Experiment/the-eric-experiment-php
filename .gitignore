@@ -105,8 +105,8 @@ dist
 
 output/
 build/
-template-modern/js
-template-modern/css
+template-modern/src/js
+template-modern/src/css
 blog-engine/custom_variant_selector.php
 blog-engine/config.php
 blog-engine/.htaccess

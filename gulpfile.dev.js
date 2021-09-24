@@ -13,4 +13,4 @@ function configs() {
 const build = series(buildTemplateModern(), configs);
 
 exports.build = build;
-exports.default = series(empty, build);
+exports.default = series(build);
