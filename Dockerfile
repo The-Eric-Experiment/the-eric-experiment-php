@@ -20,7 +20,7 @@ RUN chmod 755 /usr/local/bin/start-apache
 
 
 RUN a2enmod rewrite
-COPY ./build /var/www
+COPY build/ /var/www
 WORKDIR /var/www
 RUN chown -R www-data:www-data /var/www
 RUN chmod 644 /var/www/.htaccess 
