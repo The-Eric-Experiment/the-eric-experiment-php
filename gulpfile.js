@@ -4,14 +4,21 @@ const { build: buildEngine } = require("./blog-engine/gulpfile");
 const { build: buildTemplateRetro } = require("./template-retro/gulpfile");
 const { build: buildTemplateModern } = require("./template-modern/gulpfile");
 const path = require("path");
+const fs = require("fs");
 
 const buildFolder = path.join(__dirname, "./build");
+
+function createDir(cb) {
+  fs.mkdir(buildFolder, () => {
+    cb();
+  });
+}
 
 // The `clean` function is not exported so it can be considered a private task.
 // It can still be used within the `series()` composition.
 function empty() {
   // body omitted
-  return src("./build/", { read: false }).pipe(clean());
+  return src("./build", { read: false }).pipe(clean());
 }
 
 function configs() {
@@ -26,4 +33,4 @@ const build = series(
 );
 
 exports.build = build;
-exports.default = series(empty, build);
+exports.default = series(createDir, empty, build);
