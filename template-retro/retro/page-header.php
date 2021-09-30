@@ -61,16 +61,16 @@ function get_spacing($middle_point, $index)
                 </a>
               </td>
               <td>
-                <img src="/templates/retro/public/nothing.gif" width="4" height="1" borde="0">
+                <img src="/templates/retro/public/nothing.gif" width="4" height="1" border="0">
               </td>
               <td align="right" valign="center">
                 <a href="<?= $item->path ?>">
-                  <img src="/templates/retro/public/nothing.gif" width="1" height="5" borde="0"><br>
-                  <img src="<?= $item->icon ?>" borde="0">
+                  <img src="/templates/retro/public/nothing.gif" width="1" height="5" border="0"><br>
+                  <img src="<?= $item->icon ?>" border="0">
                 </a>
               </td>
               <td>
-                <img src="/templates/retro/public/nothing.gif" width="<?php echo get_spacing($left_middle_point, $key) * 10; ?>" height="1" borde="0">
+                <img src="/templates/retro/public/nothing.gif" width="<?php echo get_spacing($left_middle_point, $key) * 10; ?>" height="1" border="0">
               </td>
             </tr>
           </table>
@@ -82,16 +82,16 @@ function get_spacing($middle_point, $index)
           <table cellspacing="0" cellpadding="0" border="0">
             <tr>
               <td>
-                <img src="/templates/retro/public/nothing.gif" width="<?php echo get_spacing($right_middle_point, $key) * 10; ?>" height="1" borde="0">
+                <img src="/templates/retro/public/nothing.gif" width="<?php echo get_spacing($right_middle_point, $key) * 10; ?>" height="1" border="0">
               </td>
               <td align="left" valign="center">
                 <a href="<?= $item->path ?>">
-                  <img src="/templates/retro/public/nothing.gif" width="1" height="5" borde="0"><br>
-                  <img src="<?= $item->icon ?>" borde="0">
+                  <img src="/templates/retro/public/nothing.gif" width="1" height="5" border="0"><br>
+                  <img src="<?= $item->icon ?>" border="0">
                 </a>
               </td>
               <td>
-                <img src="/templates/retro/public/nothing.gif" width="4" height="1" borde="0">
+                <img src="/templates/retro/public/nothing.gif" width="4" height="1" border="0">
               </td>
               <td align="left" valign="center">
                 <a href="<?= $item->path ?>">
