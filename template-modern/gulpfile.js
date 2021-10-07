@@ -8,7 +8,12 @@ const sass = require("gulp-sass")(require("sass"));
 function buildStyles(destination) {
   return () =>
     src(path.join(__dirname, "./modern/scss/index.scss"))
-      .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+      .pipe(
+        sass({ outputStyle: "compressed", includePaths: "node_modules" }).on(
+          "error",
+          sass.logError
+        )
+      )
       .pipe(
         rename(function (path) {
           // Updates the object in-place
