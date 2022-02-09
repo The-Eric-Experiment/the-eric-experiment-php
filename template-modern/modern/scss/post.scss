@@ -10,6 +10,45 @@
   }
 }
 
+#post-header {
+  border: 0;
+  position: relative;
+  padding: 0.5rem;
+  overflow: hidden;
+
+  .inner {
+    position: relative;
+    margin-top: 5rem;
+    text-shadow: 2px 2px 3px $font-dark-grey;
+  }
+
+  .image {
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    overflow: hidden;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    > img {
+      filter: blur(3px);
+      width: 100%;
+      border-radius: 0.25rem;
+      object-fit: cover;
+    }
+  }
+}
+
+#post-container {
+  background-color: $page-background;
+  background: url(/templates/modern/public/Fine_Speckled0001A16B.gif);
+  color: $font-dark-grey;
+  padding: 1rem;
+}
+
 #post-content {
   text-align: justify;
   text-justify: inter-word;
