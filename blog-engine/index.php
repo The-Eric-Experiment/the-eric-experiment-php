@@ -20,9 +20,9 @@ try {
   require 'engine/image-mapper.php';
   require 'engine/file-loader.php';
   require 'engine/paginator.php';
-  require 'engine/gallery-parser.php';
+  require 'engine/parsers/gallery-parser.php';
   require 'engine/templating.php';
-  require 'engine/markdown.php';
+  require 'engine/parsers/markdown-parser.php';
   require "engine/routes.php";
 } catch (Exception $e) {
   echo var_dump($e);

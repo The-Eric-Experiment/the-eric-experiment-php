@@ -1,8 +1,8 @@
 <?php
-$config = require(__DIR__ . '/../config.php');
+$config = require(__DIR__ . '/../../config.php');
 
 return function () use ($templates, $config) {
-  $intro_path = __DIR__ . '/../' . $config["intro"];;
+  $intro_path = __DIR__ . '/../../' . $config["intro"];;
   $md = file_get_contents($intro_path);
 
   $filteredPosts = array_map(function ($slug) {

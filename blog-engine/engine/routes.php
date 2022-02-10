@@ -4,14 +4,14 @@ use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
 
-$renderPage = require "page-renderer.php";
-$renderHome = require "home-renderer.php";
-$renderPost = require "post-renderer.php";
-$renderCategory = require "category-renderer.php";
-$renderTag = require "tag-renderer.php";
-$renderPosts = require "posts-renderer.php";
-$renderGallery = require "gallery-renderer.php";
-$renderNotFound = require "not-found-renderer.php";
+$renderPage = include "renderers/page-renderer.php";
+$renderHome = require "renderers/home-renderer.php";
+$renderPost = require "renderers/post-renderer.php";
+$renderCategory = require "renderers/category-renderer.php";
+$renderTag = require "renderers/tag-renderer.php";
+$renderPosts = require "renderers/posts-renderer.php";
+$renderGallery = require "renderers/gallery-renderer.php";
+$renderNotFound = require "renderers/not-found-renderer.php";
 
 SimpleRouter::get('/not-found', function () use ($renderNotFound) {
   return $renderNotFound();
