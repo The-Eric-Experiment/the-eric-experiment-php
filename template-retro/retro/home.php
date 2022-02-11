@@ -22,7 +22,7 @@
   </font><br>
   <?php $this->insert('retro::categories') ?>
   <br>
-  <?php $this->insert('retro::post-list', ['posts' => $posts, 'custom_next_link' => ['url' => '/posts?page=1', 'icon' => '/templates/retro/public/more_md_wht.gif']]) ?>
+  <?php $this->insert('retro::post-list', ['posts' => $posts, 'previous_page' => $previous_page, 'next_page' => $next_page, 'custom_next_link' => ['url' => '/posts?page=1', 'icon' => '/templates/retro/public/more_md_wht.gif']]) ?>
   <br>
   <?php $this->insert('retro::categories') ?>
   <!-- Start Old'aVista Banner Code -->

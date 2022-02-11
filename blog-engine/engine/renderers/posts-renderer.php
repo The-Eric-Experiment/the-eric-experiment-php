@@ -1,13 +1,17 @@
 <?php
 return function () use ($templates) {
-  $page = $_GET["page"] ?? "0";
+  $page = $_GET["page"] ? intval($_GET["page"]) + 1 : 1;
 
-  $filteredPosts = array_map(function ($slug) {
-    return (object) BLOG_POSTS[$slug];
-  }, BLOG_POSTS_ORDER);
+  $pagination = createPagination(function ($offset) {
+    $current_items = getDBPosts($offset, PAGE_LIMIT);
+    $total_items = getDBPostCount();
 
-  return $templates->render(withVariant('posts'), [
-    'posts' => $filteredPosts,
+    return [$current_items, $total_items];
+  });
+
+  $model = array_merge([
     'page' => $page
-  ]);
+  ], $pagination);
+
+  return $templates->render(withVariant('posts'), $model);
 };

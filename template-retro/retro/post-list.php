@@ -1,15 +1,11 @@
-<?php
-$pagination = createPagination($posts);
-?>
-
 <table bordercolordark="#000000" width="600" bordercolor="#000000" border="0" bgcolor="#FFFFFF" cellspacing="0" cellpadding="5" background="/templates/retro/public/Fine_Speckled0001A16B.gif">
   <tr>
     <td>
       <?php
-      $len = count($pagination->posts);
+      $len = count($posts);
       $i = 0;
       ?>
-      <?php foreach ($pagination->posts as $post) : ?>
+      <?php foreach ($posts as $post) : ?>
         <?php $isLast = $i == $len - 1; ?>
         <?php $image = getPostThumbnail($post->image) ?>
         <table width="600" cellpadding="0" cellspacing="5" border="0">
@@ -58,17 +54,17 @@ $pagination = createPagination($posts);
     <td>
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-          <?php if ($pagination->previous_page != null) : ?>
+          <?php if ($previous_page != null) : ?>
             <td>
-              <a href="<?= $pagination->previous_page ?>"><img src="/templates/retro/public/arrow_text1_left.gif" border="0"></a>
+              <a href="<?= $previous_page ?>"><img src="/templates/retro/public/arrow_text1_left.gif" border="0"></a>
             </td>
           <?php endif; ?>
-          <?php if ($pagination->next_page != null) : ?>
+          <?php if ($next_page != null) : ?>
             <td align="right">
               <?php if ($custom_next_link) : ?>
                 <a href="<?= $custom_next_link["url"] ?>"><img src="<?= $custom_next_link["icon"] ?>" border="0"></a>
               <?php else : ?>
-                <a href="<?= $pagination->next_page ?>"><img src="/templates/retro/public/arrow_text1_right.gif" border="0"></a>
+                <a href="<?= $next_page ?>"><img src="/templates/retro/public/arrow_text1_right.gif" border="0"></a>
               <?php endif; ?>
             </td>
           <?php endif; ?>

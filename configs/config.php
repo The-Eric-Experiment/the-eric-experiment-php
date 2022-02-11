@@ -8,6 +8,7 @@ return [
   'posts-folder' => 'contents/posts',
   'post-filename' => 'post.md',
   'pages-folder' => 'contents/pages',
+  'database' => 'contents/tee-index.sqlite',
   'template-folders' => [
     'retro' => 'templates/retro',
     'modern' => 'templates/modern'

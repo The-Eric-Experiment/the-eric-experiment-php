@@ -3,14 +3,18 @@ return function () use ($templates) {
   $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
   parse_str($parsedUrl, $query);
   $id = $query["id"];
-  $category = (object) BLOG_CATEGORIES[$id];
+  $category = getDBCategory($id);
 
-  $filteredPosts = array_map(function ($slug) {
-    return (object) BLOG_POSTS[$slug];
-  }, $category->slugs);
+  $pagination = createPagination(function ($offset) use ($id) {
+    $current_items = getDBCategoryPosts($id, $offset, PAGE_LIMIT);
+    $total_items = getDBCategoryPostCount($id);
 
-  return $templates->render(withVariant('category'), [
+    return [$current_items, $total_items];
+  });
+
+  $model = array_merge([
     'name' => $category->name,
-    'posts' => $filteredPosts,
-  ]);
+  ], $pagination);
+
+  return $templates->render(withVariant('category'), $model);
 };

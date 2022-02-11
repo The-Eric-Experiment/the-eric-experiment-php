@@ -15,10 +15,10 @@ $mainMenu = json_decode($json);
 
 $categories = array_map(function ($cat) {
   return (object) $cat;
-}, BLOG_CATEGORIES);
+}, getDBCategories());
 $tags = array_map(function ($tag) {
   return (object) $tag;
-}, BLOG_TAGS);
+}, getDBTags());
 
 function addData($mainMenu, $variantFn = null)
 {
