@@ -1,7 +1,8 @@
-#disqus_thread {
-  // background-color: $page-background;
-  // background: url(/templates/modern/public/Fine_Speckled0001A16B.gif);
+#page .content.page #disqus_thread {
+  background-color: $grey50;
+  background: url(/templates/modern/public/Fine_Speckled0001A16B.gif);
   // color: $font-dark-grey;
   font-family: $font-family;
   margin-top: 2rem;
+  padding: 8px;
 }

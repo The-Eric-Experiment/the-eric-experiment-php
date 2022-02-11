@@ -1,6 +1,7 @@
 <?php $this->layout(withVariant('layout'), ['title' => $this->e($data->title), 'showSideContent' => true]) ?>
 <?php $this->push('seo') ?>
-<?php $image = "https://www.ericexperiment.com/contents/posts/" . $data->slug . '/' . $data->image; ?>
+<?php $imagePath = "/contents/posts/" . $data->slug . '/' . $data->image; ?>
+<?php $image = "https://www.ericexperiment.com" . $imagePath ?>
 <meta name="description" content="<?= $this->e($data->description); ?>">
 <link rel="canonical" href="https://www.ericexperiment.com/post/<?= $this->e($data->slug); ?>" />
 <meta property="og:locale" content="en_AU" />
@@ -24,29 +25,38 @@
 <?php $this->end() ?>
 
 <div class="content post">
-  <h1><?= $this->e($data->title); ?></h1>
-  <div id="post-metadata">
-    <div class="metadata">
-      <span>Published:</span>
-      <?= $this->e($data->date); ?>
+  <div id="post-header">
+    <div class="image">
+      <img src="<?= $image ?>" border="0" alt="<?= $data->title ?>" />
     </div>
-    <div class="metadata">
-      <span>Tags:</span>
-      <?php
-      $len = count($data->tags);
-      $i = 0;
-      ?>
-      <?php foreach ($data->tags as $id => $tag) : ?>
-        <?php $isLast = $i == $len - 1; ?>
-        <a href="/tag?id=<?= $tag->id ?>"><?= $this->e($tag->name) ?></a><?php if (!$isLast) : ?>, <?php endif; ?>
-      <?php $i++ ?>
-    <?php endforeach; ?>
+    <div class="inner">
+      <h1><?= $this->e($data->title); ?></h1>
+      <div id="post-metadata">
+        <div class="metadata">
+          <span>Published:</span>
+          <?= $this->e($data->date); ?>
+        </div>
+        <div class="metadata">
+          <span>Tags:</span>
+          <?php
+          $len = count($data->tags);
+          $i = 0;
+          ?>
+          <?php foreach ($data->tags as $id => $tag) : ?>
+            <?php $isLast = $i == $len - 1; ?>
+            <a href="/tag?id=<?= $tag->id ?>"><?= $this->e($tag->name) ?></a><?php if (!$isLast) : ?>, <?php endif; ?>
+          <?php $i++ ?>
+        <?php endforeach; ?>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="post-content">
-    <?= $data->content ?>
-  </div>
+  <div id="post-container">
+    <div id="post-content">
+      <?= $data->content ?>
+    </div>
 
-  <div id="disqus_thread"></div>
+    <div id="disqus_thread"></div>
+  </div>
 </div>
