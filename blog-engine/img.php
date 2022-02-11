@@ -1,6 +1,6 @@
 <?php
 $config = require "config.php";
-$renderImage = require "engine/image-renderer.php";
+$renderImage = require "engine/renderers/image-renderer.php";
 $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($parsedUrl, $query);
 

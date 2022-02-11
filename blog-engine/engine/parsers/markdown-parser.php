@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../third-party/load-parsedown.php";
+require __DIR__ . "/../../third-party/load-parsedown.php";
 
 define('FULL_YOUTUBE_REGEX', '/(?:(?:https?:)?(?:\/\/)?)(?:(?:www)?\.)?youtube\.(?:.+?)\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9_-]{11})/');
 define('SHORT_YOUTUBE_REGEX', '/(?:(?:https?:)?(?:\/\/)?)?youtu\.be\/([a-zA-Z0-9_-]{11})/');

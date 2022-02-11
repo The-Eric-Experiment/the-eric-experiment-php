@@ -167,16 +167,24 @@ footer {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 12px;
 
     .tag {
-      color: $main-green;
-      text-decoration: none;
-      padding: 0.5rem;
-      font-size: $font-size-600;
+      overflow: visible;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 12px;
 
-      &:hover {
-        background-color: $main-green;
-        color: $font-dark-grey;
+      & > a {
+        color: $main-green;
+        text-decoration: none;
+        font-size: $font-size-600;
+
+        &:hover {
+          background-color: $main-green;
+          color: $font-dark-grey;
+        }
       }
     }
   }

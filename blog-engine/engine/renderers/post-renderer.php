@@ -6,21 +6,10 @@ function getPost(string $slug)
   global $templates;
   list('object' => $object, 'post_path' => $post_path) = loadPostMd($slug);
 
-  $tags = array_map(function ($t) {
-    $id = md5(trim(strtolower($t)));
-    return (object)[
-      'id' => $id,
-      'name' => $t,
-    ];
-  },  explode(',', $object->tags));
+  $post_id = md5($slug);
 
-  $categories = array_map(function ($c) {
-    $id = md5(trim(strtolower($c)));
-    return (object)[
-      'id' => $id,
-      'name' => $c,
-    ];
-  }, explode(',', $object->category));
+  $tags = getDBPostTags($post_id);
+  $categories = getDBPostCategories($post_id);
 
   $templates->addData(
     [
