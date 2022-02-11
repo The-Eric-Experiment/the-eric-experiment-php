@@ -34,7 +34,7 @@
     bottom: 0;
     top: 0;
     > img {
-      filter: blur(3px);
+      filter: blur(5px);
       width: 100%;
       border-radius: 0.25rem;
       object-fit: cover;
@@ -52,5 +52,9 @@
 #post-content {
   text-align: justify;
   text-justify: inter-word;
-  margin-top: 1rem;
+  font-family: $font-family-classic;
+
+  a {
+    color: $main-orange;
+  }
 }
