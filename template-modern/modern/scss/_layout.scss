@@ -94,11 +94,13 @@ p {
 
 .side-content {
   padding: 0.5rem;
+  padding-top: 8px;
   padding-right: 0;
   padding-left: 0;
   @include tablet {
     width: 25%;
     padding-left: 0.5rem;
+    padding-top: 0;
   }
 
   .heading {
