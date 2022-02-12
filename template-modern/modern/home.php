@@ -6,7 +6,7 @@
 <?php $this->end(); ?>
 
 <div class="content">
-  <div id="welcome">
+  <div id="welcome" class="home-section">
     <div class="profile">
       <div class="avatar">
         <img src="/templates/modern/public/profile.jpg" alt="MEEEEE!!!">
@@ -15,25 +15,27 @@
     <div class="content">
       <img src="/templates/modern/public/welcome.gif">
       <?= $intro ?>
-      <div class="social-icons">
-        <a href="https://twitter.com/ericmackrodt" target="_blank" class="social-icon twitter">
-        </a>
+    </div>
+  </div>
+  <div class="home-section">
+    <div class="social-icons">
+      <a href="https://twitter.com/ericmackrodt" target="_blank" class="social-icon twitter">
+      </a>
 
-        <a href="https://www.facebook.com/ericmackrodt" target="_blank" class="social-icon facebook">
-        </a>
+      <a href="https://www.facebook.com/ericmackrodt" target="_blank" class="social-icon facebook">
+      </a>
 
-        <a href="https://www.youtube.com/c/TheEricExperiment?sub_confirmation=1" target="_blank" class="social-icon youtube">
-        </a>
+      <a href="https://www.youtube.com/c/TheEricExperiment?sub_confirmation=1" target="_blank" class="social-icon youtube">
+      </a>
 
-        <a href="https://github.com/ericmackrodt" target="_blank" class="social-icon github">
-        </a>
+      <a href="https://github.com/ericmackrodt" target="_blank" class="social-icon github">
+      </a>
 
-        <a href="https://www.instagram.com/ericmackrodt/" target="_blank" class="social-icon instagram">
-        </a>
+      <a href="https://www.instagram.com/ericmackrodt/" target="_blank" class="social-icon instagram">
+      </a>
 
-        <a href="https://www.linkedin.com/in/ericmackrodt/" target="_blank" class="social-icon linkedin">
-        </a>
-      </div>
+      <a href="https://www.linkedin.com/in/ericmackrodt/" target="_blank" class="social-icon linkedin">
+      </a>
     </div>
   </div>
   <div class="blerb">

@@ -4,17 +4,19 @@
   background-repeat: no-repeat;
 }
 
-#welcome {
+.home-section {
   font-family: $font-family-classic;
-  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 8px;
   @include tablet {
     flex-direction: row;
     align-items: flex-start;
   }
+}
 
+#welcome {
   .profile {
     .avatar {
       padding: 0.25rem;
@@ -26,6 +28,7 @@
         height: 10rem;
         object-fit: cover;
         border-radius: 50%;
+        margin-top: 10px;
       }
     }
   }
@@ -33,6 +36,10 @@
     flex: 1;
     h2 {
       margin-bottom: 1rem;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
     }
   }
 }
@@ -57,7 +64,6 @@
 .social-icons {
   display: flex;
   flex-direction: row;
-  margin-top: 1rem;
   .social-icon {
     width: 2.6rem;
     height: 2.6rem;
