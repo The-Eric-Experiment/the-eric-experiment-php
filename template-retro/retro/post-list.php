@@ -32,13 +32,6 @@
                     </font>
                   </td>
                 </tr>
-                <tr>
-                  <td>
-                    <font size="-1" color="#777777">
-                      <?= $post->date ?>
-                    </font>
-                  </td>
-                </tr>
               </table>
             </td>
           </tr>

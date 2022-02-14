@@ -74,18 +74,8 @@
     <script async src="/templates/modern/js/client.js"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1B8B8NBRJD"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-1B8B8NBRJD');
-    </script>
+    <!-- Plausible -->
+    <script defer data-domain="ericexperiment.com" src="https://analytics.ericexperiment.com/js/plausible.js"></script>
 
     <script>
         /**
