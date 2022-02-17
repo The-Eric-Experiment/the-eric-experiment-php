@@ -2,10 +2,10 @@
 
 function getRemoteIP()
 {
-  return array_key_exists('REMOTE_ADDR', $_SERVER)
-    ? $_SERVER['REMOTE_ADDR'] : "";
+  return $_SERVER['HTTP_CF_CONNECTING_IP'] ??
+    $_SERVER['HTTP_X_FORWARDED_FOR'] ??
+    $_SERVER['REMOTE_ADDR'] ?? "";
 }
-
 
 function getUserAgent()
 {
