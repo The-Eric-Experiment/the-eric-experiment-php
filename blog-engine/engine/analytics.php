@@ -55,7 +55,7 @@ function trackEvent(string $event_name, $props = false)
   $userAgent = getUserAgent();
   $referrer = getReferer();
   $locationUrl = getUrlPath();
-  $event_url = 'https://analytics.ericexperiment.com/api/event';
+  $event_url = 'http://plausible:8000/api/event';
 
   $additional_headers = array(
     "User-Agent: {$userAgent}",
