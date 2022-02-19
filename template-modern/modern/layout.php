@@ -76,7 +76,19 @@
 
     <!-- Plausible -->
     <script defer data-domain="ericexperiment.com" src="https://analytics.ericexperiment.com/js/plausible.js"></script>
+    <script>
+        window.plausible = window.plausible || function() {
+            (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
 
+        setTimeout(() => {
+            window.plausible('website_variant', {
+                props: {
+                    mode: "modern"
+                }
+            });
+        }, 500);
+    </script>
     <script>
         /**
          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
