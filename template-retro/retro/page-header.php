@@ -66,8 +66,7 @@ function get_spacing($middle_point, $index)
               <td align="right" valign="center">
                 <a href="<?= $item->path ?>">
                   <img src="/templates/retro/public/nothing.gif" width="1" height="5" border="0"><br>
-                  <img src="<?= $item->icon ?>" border="0">
-                </a>
+                  <img src="<?= $item->icon ?>" border="0"></a>
               </td>
               <td>
                 <img src="/templates/retro/public/nothing.gif" width="<?php echo get_spacing($left_middle_point, $key) * 10; ?>" height="1" border="0">
@@ -87,8 +86,7 @@ function get_spacing($middle_point, $index)
               <td align="left" valign="center">
                 <a href="<?= $item->path ?>">
                   <img src="/templates/retro/public/nothing.gif" width="1" height="5" border="0"><br>
-                  <img src="<?= $item->icon ?>" border="0">
-                </a>
+                  <img src="<?= $item->icon ?>" border="0"></a>
               </td>
               <td>
                 <img src="/templates/retro/public/nothing.gif" width="4" height="1" border="0">

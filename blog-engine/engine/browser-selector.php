@@ -25,11 +25,15 @@ function isOldBrowser()
     return true;
   }
 
-  if ($family == "safari" && $major < 4) {
+  if ($family == "edge" && $major < 16) {
     return true;
   }
 
-  if ($family == "opera" && $major < 60) {
+  if ($family == "safari" && $major < 10) {
+    return true;
+  }
+
+  if ($family == "opera" && $major < 44) {
     return true;
   }
 

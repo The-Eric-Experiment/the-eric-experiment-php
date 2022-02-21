@@ -20,7 +20,7 @@ if (!empty($this->section('right-content'))) {
       <?php endif; ?>
 
       <td valign="top">
-        <font face="arial" size="-1">
+        <font size="-1">
           <?= $this->section('content') ?>
         </font>
       </td>
