@@ -9,9 +9,14 @@ class ComposerStaticInit1093d93fb096fbd3268469b2a2addf2a
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '04c6c5c2f7095ccf6c481d3e53e1776f' => __DIR__ . '/..' . '/mustangostang/spyc/Spyc.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'WhichBrowser\\' => 13,
+        ),
         'U' => 
         array (
             'UAParser\\' => 9,
@@ -24,11 +29,16 @@ class ComposerStaticInit1093d93fb096fbd3268469b2a2addf2a
         ),
         'P' => 
         array (
+            'Psr\\Cache\\' => 10,
             'Pecee\\' => 6,
         ),
         'L' => 
         array (
             'League\\Plates\\' => 14,
+        ),
+        'D' => 
+        array (
+            'DeviceDetector\\' => 15,
         ),
         'C' => 
         array (
@@ -37,6 +47,11 @@ class ComposerStaticInit1093d93fb096fbd3268469b2a2addf2a
     );
 
     public static $prefixDirsPsr4 = array (
+        'WhichBrowser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/whichbrowser/parser/src',
+            1 => __DIR__ . '/..' . '/whichbrowser/parser/tests/src',
+        ),
         'UAParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/ua-parser/uap-php/src',
@@ -53,6 +68,10 @@ class ComposerStaticInit1093d93fb096fbd3268469b2a2addf2a
         array (
             0 => __DIR__ . '/..' . '/spatie/yaml-front-matter/src',
         ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
         'Pecee\\' => 
         array (
             0 => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee',
@@ -60,6 +79,10 @@ class ComposerStaticInit1093d93fb096fbd3268469b2a2addf2a
         'League\\Plates\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/plates/src',
+        ),
+        'DeviceDetector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matomo/device-detector',
         ),
         'Composer\\CaBundle\\' => 
         array (

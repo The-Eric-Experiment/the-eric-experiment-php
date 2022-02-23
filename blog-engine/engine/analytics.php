@@ -23,8 +23,10 @@ function getRemoteIP()
 
 function getUserAgent()
 {
-  return array_key_exists('HTTP_USER_AGENT', $_SERVER)
+  $ua = array_key_exists('HTTP_USER_AGENT', $_SERVER)
     ? $_SERVER['HTTP_USER_AGENT'] : "";
+
+  return getNormalizedUA($ua);
 }
 
 function getReferer()

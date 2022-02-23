@@ -6,11 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WhichBrowser\\' => array($vendorDir . '/whichbrowser/parser/src', $vendorDir . '/whichbrowser/parser/tests/src'),
     'UAParser\\' => array($vendorDir . '/ua-parser/uap-php/src'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Spatie\\YamlFrontMatter\\' => array($vendorDir . '/spatie/yaml-front-matter/src'),
+    'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'Pecee\\' => array($vendorDir . '/pecee/simple-router/src/Pecee'),
     'League\\Plates\\' => array($vendorDir . '/league/plates/src'),
+    'DeviceDetector\\' => array($vendorDir . '/matomo/device-detector'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
 );
