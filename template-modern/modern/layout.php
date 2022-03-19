@@ -13,7 +13,7 @@
     </title>
     <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=1" />
     <script>
-        if (!!window.fetch && !window.location.protocol.includes("https") && !window.location.host.includes("localhost")) {
+        if (!!window.fetch && !window.location.protocol.includes("https") && !window.location.host.includes("localhost") && !window.location.host.includes("pca.srv")) {
             window.location = window.location.href.replace("http://", "https://")
         }
     </script>
