@@ -11,7 +11,7 @@
             | <?= $title ?>
         <?php endif; ?>
     </title>
-    <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=1" />
+    <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=2" />
     <script>
         if (!!window.fetch && !window.location.protocol.includes("https") && !window.location.host.includes("localhost") && !window.location.host.includes("192.168.1.60")) {
             window.location = window.location.href.replace("http://", "https://")
