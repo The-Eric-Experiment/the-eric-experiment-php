@@ -23,10 +23,15 @@ function getRemoteIP()
 
 function getUserAgent()
 {
-  $ua = array_key_exists('HTTP_USER_AGENT', $_SERVER)
-    ? $_SERVER['HTTP_USER_AGENT'] : "";
+  if (array_key_exists('User-Agent', $_SERVER)) {
+    return $_SERVER['User-Agent'];
+  }
 
-  return getNormalizedUA($ua);
+  if (array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
+    return $_SERVER['HTTP_USER_AGENT'];
+  }
+
+  return "";
 }
 
 function getReferer()
@@ -42,7 +47,6 @@ function getUrlPath()
     "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 }
 
-
 /**
  * Tracks events
  * 
@@ -55,22 +59,26 @@ function trackEvent(string $event_name, $props = false)
 {
   $ip = getRemoteIP();
   $userAgent = getUserAgent();
-  $referrer = getReferer();
+  $referer = getReferer();
   $locationUrl = getUrlPath();
-  $event_url = 'http://plausible:8000/api/event';
+  $parsedUrl = parse_url($locationUrl);
+  // $documentPath = $parsedUrl["path"];
+  // $documentQuery = $parsedUrl["query"] ?? "";
+  $documentHost = $parsedUrl["host"];
+  $event_url = 'http://tinylytics:8080/api/event';
 
   $additional_headers = array(
     "User-Agent: {$userAgent}",
-    "X-Forwarded-For: {$ip}",
-    'Content-Type: application/json',
+    "HTTP_X_REAL_IP: {$ip}",
+    "HTTP_REFERER: {$referer}",
+    'Content-Type: application/json'
   );
 
   $data = array(
     "name" => $event_name,
-    "url" => $locationUrl,
+    "page" => $locationUrl,
     "domain" => "ericexperiment.com",
-    "screen_width" => 1666,
-    "referrer" => $referrer
+    "screenWidth" => 1666,
   );
 
   if ($props !== false) {
@@ -88,5 +96,4 @@ function trackEvent(string $event_name, $props = false)
 
 if (strpos($documentHost, 'localhost') === false) {
   trackEvent('pageview');
-  trackEvent('website_variant', array("mode" => "retro"));
 }

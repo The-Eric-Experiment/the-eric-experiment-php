@@ -1,3 +1,10 @@
+<?php
+$pageTitle = $this->e($siteName);
+if ($title) {
+    $pageTitle .= " | " . $title;
+}
+require_once getRequirePath("/engine/analytics.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +13,7 @@
     <meta name="author" content="Eric Mackrodt">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $this->e($siteName) ?>
-        <?php if ($title) : ?>
-            | <?= $title ?>
-        <?php endif; ?>
+        <?= $pageTitle ?>
     </title>
     <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=2" />
     <script>
