@@ -1,0 +1,48 @@
+.site-news {
+  .header {
+    font-size: $font-size-1100;
+    font-weight: $font-weight-bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-image: url(/templates/modern/public/linecolor.gif);
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    padding-bottom: 5px;
+
+    > img {
+      margin-right: 0.5rem;
+    }
+  }
+  .content {
+    font-size: $font-size-700;
+    padding-top: 0.5rem;
+    font-family: $font-family-computer;
+    color: #fef7e2;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      color: $main-amber;
+
+      &:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+
+      .arrow {
+        margin-right: 0.5rem;
+        flex-shrink: 0;
+        padding-top: 4px;
+
+        > img {
+          display: block;
+        }
+      }
+
+      .date {
+        color: $main-green;
+      }
+    }
+  }
+}

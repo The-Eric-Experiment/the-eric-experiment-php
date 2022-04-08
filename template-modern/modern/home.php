@@ -6,43 +6,50 @@
 <?php $this->end(); ?>
 
 <div class="content">
-  <div id="welcome" class="home-section">
-    <div class="profile">
-      <div class="avatar">
-        <img src="/templates/modern/public/profile.jpg" alt="MEEEEE!!!">
+  <div class="home-section">
+    <div class="home-column">
+      <div id="welcome">
+        <div class="profile">
+          <div class="avatar">
+            <img src="/templates/modern/public/profile.jpg" alt="MEEEEE!!!">
+          </div>
+        </div>
+        <div class="content">
+          <img src="/templates/modern/public/welcome.gif">
+          <?= $intro ?>
+        </div>
+      </div>
+      <div>
+        <div class="social-icons">
+          <a href="https://twitter.com/ericmackrodt" target="_blank" class="social-icon twitter">
+          </a>
+
+          <a href="https://www.facebook.com/ericmackrodt" target="_blank" class="social-icon facebook">
+          </a>
+
+          <a href="https://www.youtube.com/c/TheEricExperiment?sub_confirmation=1" target="_blank" class="social-icon youtube">
+          </a>
+
+          <a href="https://github.com/ericmackrodt" target="_blank" class="social-icon github">
+          </a>
+
+          <a href="https://www.instagram.com/ericmackrodt/" target="_blank" class="social-icon instagram">
+          </a>
+
+          <a href="https://www.linkedin.com/in/ericmackrodt/" target="_blank" class="social-icon linkedin">
+          </a>
+        </div>
+      </div>
+      <div>
+        <p><b>What's up with this website?</b> Check out why this website looks like this. <a href="/about-me#whatsupwiththiswebsite"><img src="/templates/modern/public/more.gif"></a></p>
+        <p>
+          Yes, you can run this on old browsers such as <a href="/windows3x/essentialsoftware#netscapecommunicator407">Netscape 4</a>.
+        </p>
       </div>
     </div>
-    <div class="content">
-      <img src="/templates/modern/public/welcome.gif">
-      <?= $intro ?>
+    <div class="home-column">
+      <?php $this->insert('modern::site-news', []) ?>
     </div>
-  </div>
-  <div class="home-section">
-    <div class="social-icons">
-      <a href="https://twitter.com/ericmackrodt" target="_blank" class="social-icon twitter">
-      </a>
-
-      <a href="https://www.facebook.com/ericmackrodt" target="_blank" class="social-icon facebook">
-      </a>
-
-      <a href="https://www.youtube.com/c/TheEricExperiment?sub_confirmation=1" target="_blank" class="social-icon youtube">
-      </a>
-
-      <a href="https://github.com/ericmackrodt" target="_blank" class="social-icon github">
-      </a>
-
-      <a href="https://www.instagram.com/ericmackrodt/" target="_blank" class="social-icon instagram">
-      </a>
-
-      <a href="https://www.linkedin.com/in/ericmackrodt/" target="_blank" class="social-icon linkedin">
-      </a>
-    </div>
-  </div>
-  <div class="blerb">
-    <p><b>What's up with this website?</b> Well, modern websites are kinda boring with their static looking contents, flat designs, pastel colors and simplistic graphics. Aren't you kinda tired of them? Well I am, that's why this site is inspired on the Web 1.0. <a href="/about-me#whatsupwiththiswebsite"><img src="/templates/modern/public/more.gif"></a></p>
-    <p>
-      With that in mind, make sure to try this website out on your retro computer running an old browser such as <a href="/windows3x/essentialsoftware#netscapecommunicator407">Netscape 4</a>. I built a mode that is 100% compatible with them.
-    </p>
   </div>
 
   <div class="lemmings-bar home-separator"></div>

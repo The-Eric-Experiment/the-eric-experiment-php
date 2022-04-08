@@ -7,6 +7,10 @@ $variant = getVariant();
 
 require_once joinPaths(__DIR__, '..', $config["contents-folder"], $variant . '-image-maps.php');
 
+// Get site news
+
+require_once joinPaths(__DIR__, '..', $config["contents-folder"], 'site-news.php');
+
 // Create new Plates engine
 $templates = new \League\Plates\Engine(__DIR__ . '/default-template');
 
