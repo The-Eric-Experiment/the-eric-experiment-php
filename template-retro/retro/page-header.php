@@ -76,7 +76,7 @@ function get_spacing($middle_point, $index)
         <?php endforeach; ?>
       </td>
       <td valign="center" align="center" width="297"><a href="/"><img src="/templates/retro/public/logo-small.gif" alt="The Eric Experiment" border="0"></a></td>
-      <td align="left" valign="center" width="156" height="100%">
+      <td align="left" valign="center" width="156">
         <?php foreach ($right_menu as $key => $item) : ?>
           <table cellspacing="0" cellpadding="0" border="0">
             <tr>

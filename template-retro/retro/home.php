@@ -1,19 +1,29 @@
 <?php $this->layout(withVariant('layout'), []) ?>
 
 <center>
-  <table bordercolordark="#000000" border="0">
+  <table cellspacing="5" cellpadding="0" border="0" width="610">
     <tr>
-      <td>
-        <img src="/templates/retro/public/avatar.jpg">
+      <td valign="top" width="50%">
+        <table bordercolordark="#000000" border="0">
+          <tr>
+            <td valign="top">
+              <img src="/templates/retro/public/avatar.jpg">
+            </td>
+            <td>
+              <img src="/templates/retro/public/welcome.gif">
+              <font size="-1">
+                <?= $intro ?>
+              </font>
+            </td>
+          </tr>  
+        </table>
       </td>
-      <td>
-        <img src="/templates/retro/public/welcome.gif">
-        <font size="-1">
-          <?= $intro ?>
-        </font>
+      <td width="50%" valign="top">
+      <?php $this->insert('retro::site-news', []) ?>
       </td>
     </tr>
   </table>
+
   <br>
   <img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif">
   <br><br>
