@@ -5,14 +5,16 @@
         <span class="shadow">&#8212;</span>
         <span class="text">&#8212;</span>
       </div>
-      <?= $title ?>
+      <span class="title-text">
+        <?= $title ?>
+      </span>
       <div class="button-container">
-        <div class="button maximise" v-on:click="maximizeWindow">
+        <div class="button maximise">
           <span>&#9650;</span>
         </div>
       </div>
       <div class="button-container">
-        <div class="button minimise" v-on:click="minimizeWindow">
+        <div class="button minimise">
           <span>&#9660;</span>
         </div>
       </div>

@@ -29,7 +29,7 @@ function buildClientJs(destination) {
       .pipe(
         gulpWebpack(
           {
-            mode: "production",
+            mode: "development",
             devtool: "cheap-source-map",
             resolve: {
               // Add `.ts` as a resolvable extension.

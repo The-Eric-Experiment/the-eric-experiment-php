@@ -1,0 +1,49 @@
+section.meteor-container {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+span.meteor {
+  z-index: -1;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1),
+    0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 1);
+  transition: opacity 8s, transform 8s;
+}
+
+@keyframes animate-tail {
+  0% {
+    transform: scaleX(0.4);
+  }
+  45% {
+    transform: scaleX(1);
+  }
+  65% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0.4);
+  }
+}
+
+span.meteor::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  /* transform: translateY(-50%); */
+  width: 300px;
+  height: 6px;
+  background: linear-gradient(90deg, #fff, transparent);
+  animation-timing-function: ease-in-out;
+  transform-origin: 0 0;
+}

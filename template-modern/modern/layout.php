@@ -13,7 +13,7 @@
     </title>
     <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=1" />
     <script>
-        if (!!window.fetch && !window.location.protocol.includes("https") && !window.location.host.includes("localhost") && !window.location.host.includes("pca.srv")) {
+        if (!!window.fetch && !window.location.protocol.includes("https") && !window.location.host.includes("localhost") && !window.location.host.includes("192.168.1.60")) {
             window.location = window.location.href.replace("http://", "https://")
         }
     </script>
@@ -30,7 +30,13 @@
                     <?php $this->insert('modern::side-content') ?>
                 <?php endif; ?>
             </section>
+        </div>
+        <div class="earth-container">
+            <div class="earth">
+                <img src="/templates/modern/public/skyline.gif" class="skyline">
+            </div>
             <footer>
+                <?php $this->insert('modern::tags') ?>
                 <div class="footer-row">
                     <div class="footer-row-crazy-separator">
                         <div class="left">
@@ -40,8 +46,7 @@
                             <img src="/templates/modern/public/cat.gif">
                         </div>
                     </div>
-                </div>
-                <?php $this->insert('modern::tags') ?>
+                </div>   
                 <div class="footer-row">
                     <div id="compatibility-content">
                         <a href="/windows3x/essentialsoftware#netscapecommunicator407"><img src="/templates/modern/public/netscap4.gif" alt="Compatible with Netscape" /></a>
@@ -64,31 +69,16 @@
                 </div>
                 <div class="footer-row">
                     <img src="/templates/modern/public/neon.gif">
-                </div>
-                <div class="footer-row">
-                    <img src="/templates/modern/public/skyline.gif">
-                </div>
+                </div> 
             </footer>
         </div>
     </div>
+    <div class="icons">
+    </div>
+    <section class="meteor-container"></section>
     <script async src="/templates/modern/js/client.js"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-    <!-- Plausible -->
-    <script defer data-domain="ericexperiment.com" src="https://analytics.ericexperiment.com/js/plausible.js"></script>
-    <script>
-        window.plausible = window.plausible || function() {
-            (window.plausible.q = window.plausible.q || []).push(arguments);
-        };
-
-        setTimeout(() => {
-            window.plausible('website_variant', {
-                props: {
-                    mode: "modern"
-                }
-            });
-        }, 500);
-    </script>
     <script>
         /**
          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.

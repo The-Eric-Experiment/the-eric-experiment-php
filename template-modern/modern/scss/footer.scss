@@ -1,0 +1,108 @@
+footer {
+  z-index: 0;
+  color: #ffffff;
+  max-width: 75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+
+  .footer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .footer-row-crazy-separator {
+    margin-top: 1rem;
+    width: 100%;
+    background: url(/templates/modern/public/flamingline.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 20px;
+    background-position-y: bottom;
+    position: relative;
+
+    .right {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1rem;
+    }
+
+    .left {
+      float: left;
+      left: 1rem;
+    }
+  }
+
+  h4 {
+    color: #fff;
+    font-weight: $font-weight-bold;
+    font-size: 2rem;
+  }
+
+  #tags {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .tag {
+      overflow: visible;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 12px;
+
+      & > a {
+        color: $main-green;
+        text-decoration: none;
+        font-size: $font-size-600;
+
+        &:hover {
+          background-color: $main-green;
+          color: $font-dark-grey;
+        }
+      }
+    }
+  }
+}
+
+.earth-container {
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-top: -75px;
+  padding-top: 330px;
+  min-height: 800px;
+  padding-bottom: 1rem;
+}
+
+.earth {
+  z-index: -2;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  width: 180%;
+  min-width: 3500px;
+  transform: translate(-50%, 0);
+  height: 150%;
+  background-color: #000;
+  border-radius: 50%;
+  border: 5px solid #ffffff;
+
+  box-shadow: inset 0 5px 20px #fff, inset 20px 0 50px #96e8e8,
+    inset 20px 0 100px #38aaaf, 0 0 30px 10px #96e8e8, 0 0 200px 100px #38aaaf;
+
+  transition: box-shadow 4s ease-out;
+
+  > .skyline {
+    position: absolute;
+    top: -108px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
