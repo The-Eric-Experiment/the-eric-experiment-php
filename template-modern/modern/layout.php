@@ -58,7 +58,7 @@ require_once getRequirePath("/engine/analytics.php");
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/previous/navigate">Previous site</a>] -
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/random/navigate">Random site</a>] -
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next site</a>]
-                        <script type="text/javascript" src="/widget/widget.js"></script>
+                        <script type="text/javascript" src="//webring.theoldnet.com/widget/widget.js"></script>
                     </div>
                 </div>
                 <div class="footer-row">
