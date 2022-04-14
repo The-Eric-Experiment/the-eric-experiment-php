@@ -50,7 +50,17 @@ require_once getRequirePath("/engine/analytics.php");
                             <img src="/templates/modern/public/cat.gif">
                         </div>
                     </div>
-                </div>   
+                </div>
+                <div class="footer-row">                          
+                    <div class="webring">
+                        <a id="theoldnet-webring-href" href="//webring.theoldnet.com/widget/a7b5c3bea8b50d7b4b97caab2eee15c1/navigate" data-website-id="a7b5c3bea8b50d7b4b97caab2eee15c1"><img src="//webring.theoldnet.com/widget/a7b5c3bea8b50d7b4b97caab2eee15c1/image" alt="The Eric Experiment" border="0"></a><br>
+                            Proud member of <a href="//webring.theoldnet.com/"><b>TheOldNet</b></a> webring! Check some other cool websites!<br>
+                            [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/previous/navigate">Previous site</a>] -
+                            [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/random/navigate">Random site</a>] -
+                            [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next site</a>]
+                        <script type="text/javascript" src="/widget/widget.js"></script>
+                    </div>
+                </div>
                 <div class="footer-row">
                     <div id="compatibility-content">
                         <a href="/windows3x/essentialsoftware#netscapecommunicator407"><img src="/templates/modern/public/netscap4.gif" alt="Compatible with Netscape" /></a>

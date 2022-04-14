@@ -39,6 +39,14 @@ require_once getRequirePath("/engine/analytics.php");
         </table>
         <br>
         <?php $this->insert('retro::tags') ?>
+        <a id="theoldnet-webring-href" href="//webring.theoldnet.com/widget/a7b5c3bea8b50d7b4b97caab2eee15c1/navigate" data-website-id="a7b5c3bea8b50d7b4b97caab2eee15c1"><img src="//webring.theoldnet.com/widget/a7b5c3bea8b50d7b4b97caab2eee15c1/image" alt="The Eric Experiment" border="0"></a><br>
+        <font size="-1">
+            Proud member of <a href="//webring.theoldnet.com/"><b>TheOldNet</b></a> webring! Check some other cool websites!<br>
+            [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/previous/navigate">Previous site</a>] -
+            [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/random/navigate">Random site</a>] -
+            [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next site</a>]
+        </font>
+        <br><br>
 
         <a href="/windows3x/essentialsoftware#netscapecommunicator407"><img src="/templates/retro/public/netscap4.gif" alt="Compatible with Netscape" border="0" /></a>
         <a href="/windows3x/essentialsoftware#internetexplorer501"><img src="/templates/retro/public/ie.gif" width="88" height="31" alt="Compatible with IE" border="0" /></a>
