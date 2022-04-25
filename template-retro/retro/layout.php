@@ -47,7 +47,11 @@ require_once getRequirePath("/engine/analytics.php");
             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next site</a>]
         </font>
         <br><br>
-
+        The Yesterweb Webring <br>
+        <a href="https://webring.yesterweb.org/noJS/index.php?d=prev&url=https://ericexperiment.com/">Previous</a>
+        <a href="https://webring.yesterweb.org/noJS/index.php?d=rand&url=https://ericexperiment.com/">Random</a>
+        <a href="https://webring.yesterweb.org/noJS/index.php?d=next&url=https://ericexperiment.com/">Next</a>
+        <br><br>
         <a href="/windows3x/essentialsoftware#netscapecommunicator407"><img src="/templates/retro/public/netscap4.gif" alt="Compatible with Netscape" border="0" /></a>
         <a href="/windows3x/essentialsoftware#internetexplorer501"><img src="/templates/retro/public/ie.gif" width="88" height="31" alt="Compatible with IE" border="0" /></a>
         <img src="/templates/retro/public/800x600.gif" border="0">
