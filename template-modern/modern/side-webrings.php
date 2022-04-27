@@ -9,6 +9,6 @@
         [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next</a>]
     </div>
 </div>
-<script src="https://yesterweb.org/js/widget.js"></script>
+<script async src="https://yesterweb.org/js/widget.js"></script>
 
                             

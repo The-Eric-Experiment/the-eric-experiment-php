@@ -15,7 +15,7 @@ require_once getRequirePath("/engine/analytics.php");
     <title>
         <?= $pageTitle ?>
     </title>
-    <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=2" />
+    <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=3" />
     <script>
         if (!!window.fetch && !window.location.protocol.includes("https") && !window.location.host.includes("localhost") && !window.location.host.includes("192.168.1.60")) {
             window.location = window.location.href.replace("http://", "https://")
@@ -58,7 +58,7 @@ require_once getRequirePath("/engine/analytics.php");
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/previous/navigate">Previous site</a>] -
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/random/navigate">Random site</a>] -
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next site</a>]
-                        <script type="text/javascript" src="//webring.theoldnet.com/widget/widget.js"></script>
+                        <script async type="text/javascript" src="//webring.theoldnet.com/widget/widget.js"></script>
                     </div>
                 </div>
                 <div class="footer-row">
@@ -89,8 +89,7 @@ require_once getRequirePath("/engine/analytics.php");
     </div>
     <div class="icons">
     </div>
-    <section class="meteor-container"></section>
-    <script async src="/templates/modern/js/client.js"></script>
+    <script src="/templates/modern/js/client.js?b=1"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     <script>
