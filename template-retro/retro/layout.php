@@ -1,9 +1,9 @@
 <?php
 $pageTitle = $this->e($siteName);
 if ($title) {
-    $pageTitle .= " | " . $title;
+    $pageTitle .= ' | '.$title;
 }
-require_once getRequirePath("/engine/analytics.php");
+require_once getRequirePath('/engine/analytics.php');
 ?>
 
 <html>
@@ -13,13 +13,13 @@ require_once getRequirePath("/engine/analytics.php");
     <title>
         <?= $pageTitle; ?>
     </title>
-    <?= $this->section('seo') ?>
+    <?= $this->section('seo'); ?>
 </head>
 
 <body bgcolor="#000000" text="#fffffff" background="/templates/retro/public/starfiel.gif" vlink="#00FF00" link="#00FF00">
-    <?php $this->insert('retro::page-header', ['mainMenu' => $mainMenu]) ?>
+    <?php $this->insert('retro::page-header', ['mainMenu' => $mainMenu]); ?>
 
-    <?= $this->section('content') ?>
+    <?= $this->section('content'); ?>
 
     <center>
         <table border="0" celspacing="0" celpadding="0" width="100%">
@@ -38,7 +38,7 @@ require_once getRequirePath("/engine/analytics.php");
             </tr>
         </table>
         <br>
-        <?php $this->insert('retro::tags') ?>
+        <?php $this->insert('retro::tags'); ?>
         <a id="theoldnet-webring-href" href="//webring.theoldnet.com/widget/a7b5c3bea8b50d7b4b97caab2eee15c1/navigate" data-website-id="a7b5c3bea8b50d7b4b97caab2eee15c1"><img src="//webring.theoldnet.com/widget/a7b5c3bea8b50d7b4b97caab2eee15c1/image" alt="The Eric Experiment" border="0"></a><br>
         <font size="-1">
             Proud member of <a href="//webring.theoldnet.com/"><b>TheOldNet</b></a> webring! Check some other cool websites!<br>
@@ -46,6 +46,14 @@ require_once getRequirePath("/engine/analytics.php");
             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/random/navigate">Random site</a>] -
             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next site</a>]
         </font>
+        <br><br>
+        <img src="//geekring.net/banner/geek_1.jpg" alt="geekring.net nvigation" usemap="#geekringmap">
+        <map name="geekringmap">
+            <area shape="rect" coords="9,28,111,53" alt="Previous geekring site" href="http://geekring.net/site/208/previous">
+            <area shape="rect" coords="248,28,350,53" alt="Random geekring site" href="http://geekring.net/site/208/random">
+            <area shape="rect" coords="490,28,592,53" alt="Next geekring site" href="http://geekring.net/site/208/next">
+            <area shape="rect" coords="465,6,566,22" alt="Main geekring site" href="http://geekring.net/">
+        </map>
         <br><br>
         The Yesterweb Webring <br>
         <a href="https://webring.yesterweb.org/noJS/index.php?d=prev&url=https://ericexperiment.com/">Previous</a>

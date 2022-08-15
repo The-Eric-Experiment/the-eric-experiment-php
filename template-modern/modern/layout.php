@@ -1,9 +1,9 @@
 <?php
 $pageTitle = $this->e($siteName);
 if ($title) {
-    $pageTitle .= " | " . $title;
+    $pageTitle .= ' | '.$title;
 }
-require_once getRequirePath("/engine/analytics.php");
+require_once getRequirePath('/engine/analytics.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ require_once getRequirePath("/engine/analytics.php");
     <meta name="author" content="Eric Mackrodt">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $pageTitle ?>
+        <?= $pageTitle; ?>
     </title>
     <link rel="stylesheet" href="/templates/modern/css/modern.css?bust=3" />
     <script>
@@ -21,17 +21,17 @@ require_once getRequirePath("/engine/analytics.php");
             window.location = window.location.href.replace("http://", "https://")
         }
     </script>
-    <?= $this->section('seo') ?>
+    <?= $this->section('seo'); ?>
 </head>
 
 <body>
     <div id="root">
         <div id="website">
-            <?php $this->insert('modern::page-header', ['mainMenu' => $mainMenu]) ?>
+            <?php $this->insert('modern::page-header', ['mainMenu' => $mainMenu]); ?>
             <section id="page">
-                <?= $this->section('content') ?>
+                <?= $this->section('content'); ?>
                 <?php if ($showSideContent) : ?>
-                    <?php $this->insert('modern::side-content') ?>
+                    <?php $this->insert('modern::side-content'); ?>
                 <?php endif; ?>
             </section>
         </div>
@@ -40,7 +40,7 @@ require_once getRequirePath("/engine/analytics.php");
                 <img src="/templates/modern/public/skyline.gif" class="skyline">
             </div>
             <footer>
-                <?php $this->insert('modern::tags') ?>
+                <?php $this->insert('modern::tags'); ?>
                 <div class="footer-row">
                     <div class="footer-row-crazy-separator">
                         <div class="left">
@@ -59,6 +59,17 @@ require_once getRequirePath("/engine/analytics.php");
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/random/navigate">Random site</a>] -
                             [<a href="//webring.theoldnet.com/member/a7b5c3bea8b50d7b4b97caab2eee15c1/next/navigate">Next site</a>]
                         <script async type="text/javascript" src="//webring.theoldnet.com/widget/widget.js"></script>
+                    </div>
+                </div>
+                <div class="footer-row">                          
+                    <div class="webring">
+                        <img src="//geekring.net/banner/geek_1.jpg" alt="geekring.net nvigation" usemap="#geekringmap">
+                        <map name="geekringmap">
+                            <area shape="rect" coords="9,28,111,53" alt="Previous geekring site" href="http://geekring.net/site/208/previous">
+                            <area shape="rect" coords="248,28,350,53" alt="Random geekring site" href="http://geekring.net/site/208/random">
+                            <area shape="rect" coords="490,28,592,53" alt="Next geekring site" href="http://geekring.net/site/208/next">
+                            <area shape="rect" coords="465,6,566,22" alt="Main geekring site" href="http://geekring.net/">
+                        </map>
                     </div>
                 </div>
                 <div class="footer-row">
