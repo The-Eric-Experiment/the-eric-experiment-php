@@ -6,12 +6,13 @@ return [
   'intro' => 'contents/intro.md',
   'main-menu' => 'contents/main-menu.json',
   'posts-folder' => 'contents/posts',
-  'post-filename' => 'post.md',
+  'galleries-folder' => 'contents/galleries',
+  'post-filename' => 'post.php',
   'pages-folder' => 'contents/pages',
   'database' => 'contents/tee-index.sqlite',
   'template-folders' => [
     'retro' => 'templates/retro',
-    'modern' => 'templates/modern'
+    'modern' => 'templates/modern',
   ],
-  'custom_variant_selector' => 'custom_variant_selector.php'
+  'custom_variant_selector' => 'custom_variant_selector.php',
 ];

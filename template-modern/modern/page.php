@@ -1,15 +1,19 @@
-<?php $this->layout(withVariant('page-content-layout'), ['title' => $this->e($data["title"])]) ?>
+<?php $this->layout('modern::layout', ['title' => $this->e($title)]); ?>
+<div class="columns">
+  <?php if (!empty($this->section('left-content'))) : ?>
+    <div class="side-content">
+      <?= $this->section('left-content'); ?>
+    </div>
+  <?php endif; ?>
 
-<?php if (!empty($data["left-content"])) : ?>
-  <?php $this->push('left-content') ?>
-  <?= $data["left-content"] ?>
-  <?php $this->end() ?>
-<?php endif; ?>
+  <div class="content page">
+    <?= $this->section('content'); ?>
+    <div id="disqus_thread"></div>
+  </div>
 
-<?= $data["content"] ?>
-
-<?php if (!empty($data["right-content"])) : ?>
-  <?php $this->push('right-content') ?>
-  <?= $data["right-content"] ?>
-  <?php $this->end() ?>
-<?php endif; ?>
+  <?php if (!empty($this->section('right-content'))) : ?>
+    <div class="side-content">
+      <?= $this->section('right-content'); ?>
+    </div>
+  <?php endif; ?>
+</div>

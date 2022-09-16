@@ -1,3 +1,3 @@
 <center>
-  <img src="<?= getContentImages($attributes["src"]) ?>" alt="<?= $attributes["alt"] ?>">
+  <img src="<?= getContentImages($src); ?>" alt="<?= $this->e($alt); ?>">
 </center>

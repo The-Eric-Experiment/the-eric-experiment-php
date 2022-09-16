@@ -9,19 +9,14 @@
 }
 
 @font-face {
-  font-family: "ms_sans_serifregular";
-  src: url("/templates/modern/public/sans/ms_sans_serif-webfont.woff2")
-      format("woff2"),
-    url("/templates/modern/public/sans/ms_sans_serif-webfont.woff")
-      format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "GLASSTTYVT220";
   src: url("/templates/modern/public/glass_tty_vt220/Glass_TTY_VT220.ttf")
     format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "w95fa";
+  src: url("/templates/modern/public/W95FA/W95FA.otf");
 }

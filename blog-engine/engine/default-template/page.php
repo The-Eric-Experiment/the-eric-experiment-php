@@ -1,15 +1,35 @@
-<?php $this->layout(withVariant('page-content-layout'), ['title' => $this->e($data["title"])]) ?>
+<?php $this->layout(withVariant('layout'), []); ?>
+<?php
+$contentWidth = 600;
+if (!empty($this->section('left-content'))) {
+    $contentWidth = $contentWidth - 120;
+}
 
-<?php if (!empty($data["left-content"])) : ?>      
-  <?php $this->push('left-content') ?>
-    <?= $data["left-content"] ?>
-  <?php $this->end() ?>
-<?php endif; ?>
+if (!empty($this->section('right-content'))) {
+    $contentWidth = $contentWidth - 120;
+}
+?>
 
-<?= $data["content"] ?>
+<center>
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <?php if (!empty($this->section('left-content'))) : ?>
+        <td valign="top" width="20%">
+          <?= $this->section('left-content'); ?>
+        </td>
+      <?php endif; ?>
 
-<?php if (!empty($data["right-content"])) : ?>      
-  <?php $this->push('right-content') ?>
-    <?= $data["right-content"] ?>
-  <?php $this->end() ?>
-<?php endif; ?>
+      <td valign="top">
+        <font size="-1">
+          <?= $this->section('content'); ?>
+        </font>
+      </td>
+
+      <?php if (!empty($this->section('right-content'))) : ?>
+        <td valign="top" width="20%">
+          <?= $this->section('right-content'); ?>
+        </td>
+      <?php endif; ?>
+    </tr>
+  </table>
+</center>

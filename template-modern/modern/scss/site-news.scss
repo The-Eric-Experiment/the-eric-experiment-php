@@ -1,4 +1,11 @@
 .site-news {
+  padding: $gutter;
+  position:relative;
+  overflow:hidden;
+  height: 100%;
+  @include crt-effect; 
+  
+
   .header {
     font-size: $font-size-1100;
     font-weight: $font-weight-bold;

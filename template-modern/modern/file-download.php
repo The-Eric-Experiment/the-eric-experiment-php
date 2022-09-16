@@ -1,12 +1,12 @@
 <div class="file-download">
   <div class="file-download-header">
-    <h4 id="<?= $data->id ?>"><?= $this->e($data->name) ?></h4>
+    <h4 id="<?= $id; ?>"><?= $this->e($name); ?></h4>
     <div class="download-link">
-      <a class="download-link" href="<?= $data->url ?>" target="_blank">
+      <a class="download-link" href="<?= $url; ?>" target="_blank">
         <img src="/templates/modern/public/floppy.gif" alt="Download">
-        <?= $data->file ?>
+        <?= $file; ?>
       </a>
     </div>
   </div>
-  <?= $data->description ?>
+  <?= html_entity_decode($description); ?>
 </div>

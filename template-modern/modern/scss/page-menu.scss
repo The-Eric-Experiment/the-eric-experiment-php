@@ -12,7 +12,9 @@
     margin: 0;
   }
 
-  li {
+  .menu-item {
+    white-space: nowrap;
+
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
@@ -26,6 +28,7 @@
       text-decoration: none;
       font-weight: $font-weight-regular;
       font-size: 1rem;
+      white-space: nowrap;
 
       &:hover {
         text-decoration: underline;

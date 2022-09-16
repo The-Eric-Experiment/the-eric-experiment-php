@@ -9,9 +9,9 @@
   <?php foreach ($items as $item) : ?>
     <tr>
       <td>
-        <a href="<?= $this->e($item->url) ?>">
+        <a href="<?= $item['href']; ?>">
           <img src="/templates/retro/public/animated_bullet_009.gif" border="0">
-          <font size="-1" color="#1238b3"><?= trim($item->content); ?></font></a>
+          <font size="-1" color="#1238b3"><?= trim($item['text']); ?></font></a>
       </td>
     </tr>
   <?php endforeach; ?>

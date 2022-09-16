@@ -15,6 +15,16 @@
   }
 }
 
+@keyframes iconspinner {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
 @mixin menuitem() {
   font-family: $font-family-dos;
   display: flex;
@@ -24,6 +34,7 @@
   cursor: pointer;
   color: $grey50;
   text-decoration: none;
+  transition: all 250ms ease-out;
   &:first-letter {
     text-decoration: underline;
   }
@@ -36,10 +47,20 @@
   &:hover {
     background-color: $grey100;
     color: $font-dark-grey;
+
+    > img {
+      transform-style: preserve-3d;
+      animation-duration: 1s;
+      animation-name: iconspinner;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
   }
 
-  &:not(:last-child) {
-    margin-bottom: 0.5rem;
+  @include tablet {
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
   }
 }
 
@@ -65,7 +86,7 @@ header {
     @include tablet {
       flex: 0;
     }
-    #logo {
+    #neon-logo {
       width: 80%;
 
       @include tablet {
@@ -118,7 +139,7 @@ header {
       display: none;
       right: 0;
       top: 100%;
-      z-index: 1;
+      z-index: 3;
 
       @include tablet {
         border: 0;

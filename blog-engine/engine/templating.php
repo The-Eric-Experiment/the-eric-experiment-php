@@ -1,50 +1,53 @@
 <?php
 
-$config = require(__DIR__ . '/../config.php');
+$config = require __DIR__.'/../config.php';
 $variant = getVariant();
 
 // Get image maps
 
-require_once joinPaths(__DIR__, '..', $config["contents-folder"], $variant . '-image-maps.php');
+require_once joinPaths(__DIR__, '..', $config['contents-folder'], $variant.'-image-maps.php');
 
 // Get site news
 
-require_once joinPaths(__DIR__, '..', $config["contents-folder"], 'site-news.php');
+require_once joinPaths(__DIR__, '..', $config['contents-folder'], 'site-news.php');
 
 // Create new Plates engine
-$templates = new \League\Plates\Engine(__DIR__ . '/default-template');
+$templates = new \League\Plates\Engine(__DIR__.'/default-template');
 
-$json = file_get_contents($config["main-menu"]);
+$json = file_get_contents($config['main-menu']);
 $mainMenu = json_decode($json);
 
 $categories = array_map(function ($cat) {
-  return (object) $cat;
+    return (object) $cat;
 }, getDBCategories());
 $tags = array_map(function ($tag) {
-  return (object) $tag;
+    return (object) $tag;
 }, getDBTags());
 
 function addData($mainMenu, $variantFn = null)
 {
-  global $templates, $config, $categories, $tags;
-  if (!$variantFn) {
-    $variantFn = function ($input) {
-      return $input;
-    };
-  }
+    global $templates, $config, $categories, $tags;
+    if (!$variantFn) {
+        $variantFn = function ($input) {
+            return $input;
+        };
+    }
 
-  $templates->addData(['mainMenu' => $mainMenu], $variantFn('layout'));
-  $templates->addData(['siteName' => $config["site-name"]], $variantFn('layout'));
-  $templates->addData(['categories' => $categories], $variantFn('categories'));
-  $templates->addData(['tags' =>  $tags], $variantFn('tags'));
+    $templates->addData(['mainMenu' => $mainMenu], $variantFn('layout'));
+    $templates->addData(['siteName' => $config['site-name']], $variantFn('layout'));
+    $templates->addData(['categories' => $categories], $variantFn('categories'));
+    $templates->addData(['tags' => $tags], $variantFn('tags'));
 }
 
 // Add default data
 addData($mainMenu);
 
-if ($config["template-folders"]) {
-  foreach ($config["template-folders"] as $name => $folder) {
-    $templates->addFolder($name, $folder, true);
-    addData($mainMenu, "withVariant");
-  }
+if ($config['template-folders']) {
+    foreach ($config['template-folders'] as $name => $folder) {
+        $templates->addFolder($name, $folder, true);
+        addData($mainMenu, 'withVariant');
+    }
 }
+
+$templates->addFolder('posts', __DIR__.'/../contents/posts', true);
+$templates->addFolder('pages', __DIR__.'/../contents/pages', true);

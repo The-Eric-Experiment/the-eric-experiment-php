@@ -17,7 +17,30 @@
     font-weight: $font-weight-bold;
   }
 
+  .content-area {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    @include tablet {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
   .content {
+    &:not(:first-child) {
+      margin-top: calc($gutter * 2);
+
+      @include tablet {
+        margin-top: 0;
+      }
+    }
+
+    @include tablet {
+      flex: 1;
+    }
+
     &.page,
     &.post {
       font-family: $font-family;

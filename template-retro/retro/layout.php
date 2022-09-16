@@ -75,8 +75,7 @@ require_once getRequirePath('/engine/analytics.php');
         Copyright © 1988-2020 The Eric Experiment
         <br>
 
-        <img src="/templates/retro/public/neon-smaller.gif">
-        <br>
+        <img src="/templates/retro/public/logo-tiny.gif"><br>
         <img src="/templates/retro/public/skyline.gif">
     </center>
 </body>

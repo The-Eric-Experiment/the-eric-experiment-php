@@ -3,8 +3,7 @@
   flex-direction: column;
   background-color: $page-background;
   background: url(/templates/modern/public/Fine_Speckled0001A16B.gif);
-  margin-top: 0.5rem;
-  padding: 0.5rem;
+  padding: $gutter;
   @include tablet {
     padding: 1rem;
   }
@@ -38,7 +37,7 @@
   .post-item {
     margin-bottom: 1rem;
     text-decoration: none;
-    // align-items: stretch;
+    font-family: $font-family-classic;
     border-radius: 0.25rem;
 
     .item-inner {

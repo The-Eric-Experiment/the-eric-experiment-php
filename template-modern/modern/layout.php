@@ -30,9 +30,6 @@ require_once getRequirePath('/engine/analytics.php');
             <?php $this->insert('modern::page-header', ['mainMenu' => $mainMenu]); ?>
             <section id="page">
                 <?= $this->section('content'); ?>
-                <?php if ($showSideContent) : ?>
-                    <?php $this->insert('modern::side-content'); ?>
-                <?php endif; ?>
             </section>
         </div>
         <div class="earth-container">
@@ -73,6 +70,12 @@ require_once getRequirePath('/engine/analytics.php');
                     </div>
                 </div>
                 <div class="footer-row">
+                    <div class="webring">
+                        <div class="yw-widget-mini" data-yw-url="https://ericexperiment.com/"></div>
+                        <script async src="https://yesterweb.org/js/widget.js"></script>
+                    </div>
+                </div>
+                <div class="footer-row">
                     <div id="compatibility-content">
                         <a href="/windows3x/essentialsoftware#netscapecommunicator407"><img src="/templates/modern/public/netscap4.gif" alt="Compatible with Netscape" /></a>
                         <a href="/windows3x/essentialsoftware#internetexplorer501"><img src="/templates/modern/public/ie.gif" width="88" height="31" alt="Compatible with IE" /></a>
@@ -93,7 +96,7 @@ require_once getRequirePath('/engine/analytics.php');
                     Copyright © 1988-2021 The Eric Experiment
                 </div>
                 <div class="footer-row">
-                    <img src="/templates/modern/public/neon.gif">
+                    <img id="footer-logo" src="/templates/modern/public/logo.png" title="Logo" />
                 </div> 
             </footer>
         </div>
@@ -101,7 +104,6 @@ require_once getRequirePath('/engine/analytics.php');
     <div class="icons">
     </div>
     <script src="/templates/modern/js/client.js?b=1"></script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     <script>
         /**

@@ -1,9 +1,9 @@
-<?php $this->layout(withVariant('layout'), []) ?>
-
+<?php $this->layout(withVariant('layout'), []); ?>
+<br>
 <center>
-  <table cellspacing="5" cellpadding="0" border="0" width="610">
+  <table cellspacing="0" cellpadding="2" width="600" bordercolordark="#DDD" bordercolorlight="#DDD" bordercolor="#DDD" border="2" background="/templates/retro/public/crtbg.gif">
     <tr>
-      <td valign="top" width="50%">
+      <td valign="top">
         <table bordercolordark="#000000" border="0">
           <tr>
             <td valign="top">
@@ -12,29 +12,33 @@
             <td>
               <img src="/templates/retro/public/welcome.gif">
               <font size="-1">
-                <?= $intro ?>
+                <?= $intro; ?>
               </font>
             </td>
           </tr>  
         </table>
       </td>
+    </tr>
+  </table>
+  <br>
+  <table cellspacing="0" cellpadding="2" width="600" bordercolordark="#DDD" bordercolorlight="#DDD" bordercolor="#DDD" border="2" background="/templates/retro/public/crtbg.gif">
+    <tr>
       <td width="50%" valign="top">
-      <?php $this->insert('retro::site-news', []) ?>
+        <?php $this->insert('retro::site-news', []); ?>
       </td>
     </tr>
   </table>
-
   <br>
   <img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif"><img src="/templates/retro/public/lemmings_walking.gif">
   <br><br>
   <font size="4">
     <b>Latest parts of the experiment</b>
   </font><br>
-  <?php $this->insert('retro::categories') ?>
+  <?php $this->insert('retro::categories'); ?>
   <br>
-  <?php $this->insert('retro::post-list', ['posts' => $posts, 'previous_page' => $previous_page, 'next_page' => $next_page, 'custom_next_link' => ['url' => '/posts?page=1', 'icon' => '/templates/retro/public/more_md_wht.gif']]) ?>
+  <?php $this->insert('retro::post-list', ['posts' => $posts, 'previous_page' => $previous_page, 'next_page' => $next_page, 'custom_next_link' => ['url' => '/posts?page=1', 'icon' => '/templates/retro/public/more_md_wht.gif']]); ?>
   <br>
-  <?php $this->insert('retro::categories') ?>
+  <?php $this->insert('retro::categories'); ?>
   <!-- Start Old'aVista Banner Code -->
   <p>
     <a href="http://www.oldavista.com/" rel="embed-banner" title="Old'aVista: The most powerful guide to the OLD internet!" target="_blank">

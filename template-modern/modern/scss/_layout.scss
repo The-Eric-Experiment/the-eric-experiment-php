@@ -53,19 +53,25 @@ p {
 }
 
 #page {
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+
+  .columns {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    @include tablet {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
 
   img {
     max-width: 100%;
   }
 
-  @include tablet {
-    flex-direction: row;
-    align-items: flex-start;
-  }
   > .content {
     flex: 1;
     .title {
@@ -86,21 +92,23 @@ p {
 }
 
 #website {
-  max-width: 75rem;
+  max-width: 1000px;
   margin: auto;
   padding: 1rem;
   padding-bottom: 0;
 }
 
 .side-content {
-  padding: 0.5rem;
-  padding-top: 8px;
-  padding-right: 0;
-  padding-left: 0;
+  flex-shrink: 0;
+  margin-right: 0;
+  margin-left: 0;
+  &:not(:first-child) {
+    margin-top: calc($gutter * 2);
+  }
   @include tablet {
-    width: 25%;
-    padding-left: 0.5rem;
-    padding-top: 0;
+    max-width: 30%;
+    margin-left: calc($gutter * 2);
+    margin-top: 0;
   }
 
   .heading {
