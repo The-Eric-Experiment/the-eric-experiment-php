@@ -104,6 +104,9 @@ p {
   margin-left: 0;
   &:not(:first-child) {
     margin-top: calc($gutter * 2);
+    @include tablet {
+      margin-top: 0;
+    }
   }
   @include tablet {
     max-width: 30%;

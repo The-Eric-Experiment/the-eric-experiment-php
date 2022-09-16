@@ -21,7 +21,7 @@
         </div>
       </div>
     <?php endif; ?>
-    <div class="content <?php if ($hide_titlebar == true): ?>no-title<?php endif; ?>">
+    <div class="window-content <?php if ($hide_titlebar == true): ?>no-title<?php endif; ?>">
       <?= $this->section('content'); ?>
     </div>
   </div>
