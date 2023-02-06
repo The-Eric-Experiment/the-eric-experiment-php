@@ -65,7 +65,7 @@ function trackEvent(string $event_name, $props = false)
   // $documentPath = $parsedUrl["path"];
   // $documentQuery = $parsedUrl["query"] ?? "";
   $documentHost = $parsedUrl["host"];
-  $event_url = 'http://tinylytics:8080/api/event';
+  $event_url = 'http://tinylytics:8099/api/event';
 
   $additional_headers = array(
     "User-Agent: {$userAgent}",
