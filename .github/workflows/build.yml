@@ -25,12 +25,5 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn
-      - name: Build
-        run: yarn build
       - name: Build container
-        run: docker-compose -f "../../../../docker-compose.yml" up -d --build
+        run: cat ~/rebuild.sh | bash
