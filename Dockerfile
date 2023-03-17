@@ -52,4 +52,6 @@ ADD docker-entrypoint.sh /
 
 HEALTHCHECK CMD wget -q --no-cache --spider localhost
 
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
