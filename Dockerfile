@@ -1,28 +1,55 @@
 # Dockerfile
-FROM php:7.4-apache
+# https://github.com/eriksoderblom/alpine-apache-php
+FROM alpine:3.17
 
-RUN apt-get update --fix-missing
-RUN apt-get install -y curl
-RUN apt-get install -y build-essential libssl-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev
+RUN apk --no-cache --update add \
+    apache2 \
+    apache2-ssl \
+    curl \
+    php81-apache2 \
+    # php81-bcmath \
+    # php81-bz2 \
+    # php81-calendar \
+    php81-common \
+    php81-ctype \
+    php81-curl \
+    # php81-dom \
+    php81-gd \
+    # php81-iconv \
+    # php81-mbstring \
+    # php81-mysqli \
+    # php81-mysqlnd \
+    php81-openssl \
+    # php81-pdo_mysql \
+    # php81-pdo_pgsql \
+    php81-sqlite3 \
+    php81-pdo_sqlite \
+    # php81-phar \
+    # php81-session \
+    # php81-xml \
+    && mkdir /htdocs
 
-RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
-  && docker-php-ext-install gd
+RUN apk add nodejs yarn --repository="http://dl-cdn.alpinelinux.org/alpine/v3.15/main/"
+ENV NODE_OPTIONS --openssl-legacy-provider
 
-# RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
-# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add
-# RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-# RUN apt-get update -qq && apt-get install -y nodejs yarn
+EXPOSE 80 443
 
-RUN ln -s /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY start-apache /usr/local/bin
-RUN chmod 755 /usr/local/bin/start-apache
+RUN mkdir -p /build-temp
+COPY . /build-temp
+WORKDIR /build-temp
 
+RUN yarn
 
-RUN a2enmod rewrite
-COPY build/ /var/www
-WORKDIR /var/www
-RUN chown -R www-data:www-data /var/www
-RUN chmod 644 /var/www/.htaccess 
-RUN chmod 755 /var/www
-CMD ["start-apache"]
+RUN yarn build
+
+RUN mv /build-temp/build/* /htdocs
+COPY configs/.htaccess /htdocs/.htaccess
+WORKDIR /htdocs
+
+RUN rm -rf /build-temp
+
+ADD docker-entrypoint.sh /
+
+HEALTHCHECK CMD wget -q --no-cache --spider localhost
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
