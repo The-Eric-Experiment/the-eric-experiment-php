@@ -8,17 +8,23 @@ use DeviceDetector\Parser\Device\AbstractDeviceParser;
 // for other options see VERSION_TRUNCATION_* constants in DeviceParserAbstract class
 AbstractDeviceParser::setVersionTruncation(AbstractDeviceParser::VERSION_TRUNCATION_NONE);
 
-function joinPaths(...$parts)
-{
-  $path = join('/', array_map(function ($item) {
-    return trim($item, '/');
-  }, $parts));
+function joinPaths(...$paths) {
+    $separator = DIRECTORY_SEPARATOR;
+    $joinedPath = implode($separator, $paths);
+    $joinedPath = preg_replace('#'.$separator.'{2,}#', $separator, $joinedPath); // Replace double slashes with a single slash
 
-  if (substr($parts[0], 0, 1) === "/") {
-    return '/' . $path;
-  }
+    // Handle ".." components
+    $parts = explode($separator, $joinedPath);
+    $finalParts = array();
+    foreach ($parts as $part) {
+        if ($part === "..") {
+            array_pop($finalParts);
+        } else {
+            $finalParts[] = $part;
+        }
+    }
 
-  return $path;
+    return implode($separator, $finalParts);
 }
 
 function getRequirePath($input)
