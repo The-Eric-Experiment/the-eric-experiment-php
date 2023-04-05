@@ -46,11 +46,13 @@ RUN mv /build-temp/build/* /htdocs
 COPY configs/.htaccess /htdocs/.htaccess
 COPY configs/downloads.conf /etc/apache2/conf.d/downloads.conf
 
+RUN sed -i 's/#LoadModule rewrite_module/LoadModule rewrite_module/' /etc/apache2/httpd.conf
+
 RUN gid=$(getent group www-data | cut -d: -f3) \
  && adduser -u $gid -D -S -G www-data www-data
 RUN chown -R www-data:www-data /htdocs
 
-# RUN a2enmod rewrite
+RUN a2enmod rewrite
 
 WORKDIR /htdocs
 
