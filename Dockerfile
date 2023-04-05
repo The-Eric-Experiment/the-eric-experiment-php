@@ -2,9 +2,6 @@
 # https://github.com/eriksoderblom/alpine-apache-php
 FROM alpine:3.17
 
-RUN addgroup -g 82 -S www-data \
-    && adduser -u 82 -D -S -G www-data www-data
-
 RUN apk --no-cache --update add \
     apache2 \
     apache2-ssl \
