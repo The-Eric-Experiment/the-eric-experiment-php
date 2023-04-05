@@ -34,8 +34,6 @@ ENV NODE_OPTIONS --openssl-legacy-provider
 
 EXPOSE 80 443
 
-COPY configs/downloads.conf /etc/apache2/conf.d/downloads.conf
-
 RUN mkdir -p /build-temp
 COPY . /build-temp
 WORKDIR /build-temp
@@ -46,6 +44,7 @@ RUN yarn build
 
 RUN mv /build-temp/build/* /htdocs
 COPY configs/.htaccess /htdocs/.htaccess
+COPY configs/downloads.conf /etc/apache2/conf.d/downloads.conf
 
 RUN gid=$(getent group www-data | cut -d: -f3) \
  && adduser -u $gid -D -S -G www-data www-data
