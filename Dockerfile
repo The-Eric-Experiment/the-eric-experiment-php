@@ -45,8 +45,8 @@ RUN yarn build
 RUN mv /build-temp/build/* /htdocs
 COPY configs/.htaccess /htdocs/.htaccess
 
-RUN addgroup -g 82 -S www-data \
- && adduser -u 82 -D -S -G www-data www-data
+RUN gid=$(getent group www-data | cut -d: -f3) \
+ && adduser -u $gid -D -S -G www-data www-data
 RUN chown -R www-data:www-data /htdocs
 
 # RUN a2enmod rewrite
