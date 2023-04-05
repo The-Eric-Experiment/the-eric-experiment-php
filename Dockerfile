@@ -45,7 +45,7 @@ RUN yarn build
 RUN mv /build-temp/build/* /htdocs
 COPY configs/.htaccess /htdocs/.htaccess
 
-RUN a2enmod rewrite
+# RUN a2enmod rewrite
 
 WORKDIR /htdocs
 
