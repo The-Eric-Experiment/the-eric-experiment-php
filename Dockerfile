@@ -49,7 +49,7 @@ COPY configs/.htaccess /htdocs/.htaccess
 
 WORKDIR /htdocs
 
-RUN chown -R www-data:www-data /htdocs
+# RUN chown -R www-data:www-data /htdocs
 RUN chmod 644 /htdocs/.htaccess
 RUN chmod 755 /htdocs
 
