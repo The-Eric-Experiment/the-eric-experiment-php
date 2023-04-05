@@ -44,7 +44,14 @@ RUN yarn build
 
 RUN mv /build-temp/build/* /htdocs
 COPY configs/.htaccess /htdocs/.htaccess
+
+RUN a2enmod rewrite
+
 WORKDIR /htdocs
+
+RUN chown -R www-data:www-data /htdocs
+RUN chmod 644 /htdocs/.htaccess
+RUN chmod 755 /htdocs
 
 RUN rm -rf /build-temp
 
