@@ -2,6 +2,9 @@
 # https://github.com/eriksoderblom/alpine-apache-php
 FROM alpine:3.17
 
+RUN addgroup -g 82 -S www-data \
+    && adduser -u 82 -D -S -G www-data www-data
+
 RUN apk --no-cache --update add \
     apache2 \
     apache2-ssl \
@@ -45,11 +48,14 @@ RUN yarn build
 RUN mv /build-temp/build/* /htdocs
 COPY configs/.htaccess /htdocs/.htaccess
 
+RUN addgroup -g 82 -S www-data \
+ && adduser -u 82 -D -S -G www-data www-data
+RUN chown -R www-data:www-data /htdocs
+
 # RUN a2enmod rewrite
 
 WORKDIR /htdocs
 
-# RUN chown -R www-data:www-data /htdocs
 RUN chmod 644 /htdocs/.htaccess
 RUN chmod 755 /htdocs
 
