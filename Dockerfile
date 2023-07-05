@@ -34,17 +34,13 @@ ENV NODE_OPTIONS --openssl-legacy-provider
 
 EXPOSE 80 443
 
-RUN mkdir -p /build-temp
-COPY . /build-temp
-WORKDIR /build-temp
+COPY downloads.conf /etc/apache2/conf.d/downloads.conf
+COPY . /htdocs
+WORKDIR /htdocs
 
 RUN yarn
 
 RUN yarn build
-
-RUN mv /build-temp/build/* /htdocs
-COPY configs/.htaccess /htdocs/.htaccess
-COPY configs/downloads.conf /etc/apache2/conf.d/downloads.conf
 
 RUN sed -i 's/#LoadModule rewrite_module/LoadModule rewrite_module/' /etc/apache2/httpd.conf
 
@@ -53,8 +49,6 @@ RUN gid=$(getent group www-data | cut -d: -f3) \
 RUN chown -R www-data:www-data /htdocs
 
 # RUN a2enmod rewrite
-
-WORKDIR /htdocs
 
 RUN chmod 644 /htdocs/.htaccess
 RUN chmod 755 /htdocs

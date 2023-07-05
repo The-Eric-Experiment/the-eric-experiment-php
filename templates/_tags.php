@@ -1,23 +1,28 @@
-<font color="#ffffff"><h3>Tags</h3></font>
-<?php 
-$display_tags = array_filter($tags, function ($item){return $item->cnt > 1;}); 
-$cols = 3;
-$rows = ceil(count($display_tags) / $cols);
-$cell_spacing = 4;
-$width = 700 - ($cell_spacing * ($cols + 1));
-?>
-<table width="<?=$width?>" cellspacing="<?=$cell_spacing;?>" border="1" borderlight="#ffffff" borderdark="#ffffff" cellpadding="0">
-<tr>
-<?php for ($col_index = 0; $col_index < $cols; $col_index++) : ?>
-<td>
-<?php for ($row_index = 0; $row_index < $rows; $row_index++) : ?>
-<?php $index = $row_index + ($col_index * $rows); ?>
-<?php if ($index < count($display_tags)) : ?>
-<?php $tag = $display_tags[$index] ?>
-<a href="/tag?id=<?= $tag->id ?>"><?= $this->e($tag->name) ?> (<?= $tag->cnt ?>)</a><br>
-<?php endif; ?>
-<?php endfor; ?>
-</td>
-<?php endfor; ?>
-</tr>
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <img src="/public/tag.gif">
+        </td>
+        <td>
+        <?= $this->vertical_space() ?>
+        </td>
+        <td valign="middle">
+            <?= $this->text('Tags', ['size' => '3', 'face' => 'arial', 'bold' => true]) ?>
+        </td>
+    </tr>
 </table>
+<img src="/public/linecolor.gif" width="100%" height="2">
+    <br>
+    <?= $this->vertical_space() ?>
+<?php
+$display_tags = array_filter($tags, function ($item) { return $item->cnt > 1; });
+$total_tags = count($display_tags);
+
+for ($index = 0; $index < $total_tags; $index++) {
+    $tag = $display_tags[$index];
+    echo "<a href='/tag?id={$tag->id}'>" . $this->e($tag->name) . " ({$tag->cnt})</a>";
+    if ($index < $total_tags - 1) {
+        echo "&nbsp;&nbsp;";
+    }
+}
+?>

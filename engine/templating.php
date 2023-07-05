@@ -3,8 +3,7 @@
 // Create new Plates engine
 $templates = new \League\Plates\Engine(__DIR__.'/../templates');
 
-$json = file_get_contents(CONFIG['main-menu']);
-$main_menu = json_decode($json);
+require_once joinPaths(__DIR__, '..', CONFIG['contents-folder'], 'main-menu.php');
 
 $categories = array_map(function ($cat) {
     return (object) $cat;
@@ -13,7 +12,7 @@ $tags = array_map(function ($tag) {
     return (object) $tag;
 }, getDBTags());
 
-$templates->addData(['main_menu' => $main_menu], '_menu');
+$templates->addData(['main_menu' => MAIN_MENU], '_menu');
 $templates->addData(['site_name' => CONFIG['site-name']], '_layout');
 $templates->addData(['categories' => $categories], '_categories');
 $templates->addData(['tags' => $tags], '_tags');
@@ -22,21 +21,29 @@ $templates->addFolder('posts', joinPaths(__DIR__,'..',CONFIG['contents-folder'],
 $templates->addFolder('pages', joinPaths(__DIR__,'..',CONFIG['contents-folder'],'/pages'), true);
 
 function fixHtml($html) {
-    $pattern = [
-        '/\>[^\S ]+/s',  // remove spaces after tags, except newline
-        '/[^\S ]+\</s',  // remove spaces before tags, except newline
-        '/(\s)+/s'       // remove multiple spaces and newlines
-    ];
-    $replacement = [
-        '>',
-        '<',
-        '\\1'
-    ];
-    $clean_html = preg_replace($pattern, $replacement, $html);
-    $clean_html = str_replace(array("\r\n", "\r", "\n"), '', $clean_html); // remove line breaks without spaces
-    $clean_html = preg_replace('/>\s+</', '><', $clean_html); // remove spaces between tags that are not adjacent
-    return $clean_html;
+    // Leave script and style content untouched
+    $unprocessedParts = [];
+    $html = preg_replace_callback('/<script\b[^>]*>.*?<\/script>|<style\b[^>]*>.*?<\/style>/si', function($matches) use (&$unprocessedParts) {
+        $placeholder = '##' . count($unprocessedParts) . '##';
+        $unprocessedParts[] = $matches[0];
+        return $placeholder;
+    }, $html);
+
+    // Remove all whitespace between tags
+    $html = preg_replace('/(?<=>)[\s\n]+(?=<)/', '', $html);
+
+    // Ensure single space between text and a tag
+    $html = preg_replace('/(\S)[\s\n]+(?=<)/', '$1 ', $html);
+    $html = preg_replace('/(?<=>)[\s\n]+(\S)/', ' $1', $html);
+
+    // Restore script and style content
+    $html = preg_replace_callback('/##(\d+)##/', function($matches) use ($unprocessedParts) {
+        return $unprocessedParts[$matches[1]];
+    }, $html);
+
+    return $html;
 }
+
 
 function templateData($args) {
     global $templates;

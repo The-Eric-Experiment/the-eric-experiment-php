@@ -1,12 +1,19 @@
 <?php
     $size = empty($size) ? "" : " size=\"$size\"";
-    $c = empty($color) ? '#000000' : $color;
-    $color =  " color=\"$c\"";
-    $face = empty($face) ? 'Arial,Microsoft Sans Serif' : $face;
-?>
+    if (!empty($face) && $face === 'arial') {
+        $face = 'face="Arial,Microsoft Sans Serif"';
+    } else if (!empty($face)) {
+        $face = "face=\"$face\"";
+    } else {
+        $face = '';
+    }
 
-<font face="<?= $face ?>"<?= $size ?><?= $color?>>
-    <?php if (!empty($bold) && $bold === true): ?><b><?php endif; ?>
-        <?= $text ?>
-    <?php if (!empty($bold) && $bold === true): ?></b><?php endif; ?>
-</font>
+    if (!empty($color) && $color === 'orange') {
+        $color = ' color="#ffbf00"';
+    } else if (!empty($color)) {
+        $color = " color=\"$color\"";
+    } else {
+        $color = '';
+    }
+?>
+<font <?= $face ?><?= $size ?><?= $color?>><?php if (!empty($bold) && $bold === true): ?><b><?php endif; ?><?= $text ?><?php if (!empty($bold) && $bold === true): ?></b><?php endif; ?></font>

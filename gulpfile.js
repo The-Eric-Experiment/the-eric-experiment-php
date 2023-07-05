@@ -1,36 +1,55 @@
 const { series, src, dest } = require("gulp");
-const clean = require("gulp-clean");
-const { build: buildEngine } = require("./blog-engine/gulpfile");
-const { build: buildTemplateRetro } = require("./template-retro/gulpfile");
-const { build: buildTemplateModern } = require("./template-modern/gulpfile");
 const path = require("path");
-const fs = require("fs");
+const webpack = require("webpack");
+const gulpWebpack = require("webpack-stream");
+const rename = require("gulp-rename");
 
-const buildFolder = path.join(__dirname, "./build");
-
-function createDir(cb) {
-  fs.mkdir(buildFolder, () => {
-    cb();
-  });
+function buildClientJs(destination) {
+  return () =>
+    src(path.join(__dirname, "./scripts/tee.js"))
+      .pipe(
+        gulpWebpack(
+          {
+            mode: "production",
+            devtool: false,
+            resolve: {
+              // Add `.ts` as a resolvable extension.
+              extensions: [".vue", ".js"],
+              // alias: { vue: "vue/dist/vue.esm.js" },
+            },
+            module: {
+              rules: [
+                {
+                  test: /\.css$/,
+                  use: ["style-loader", "css-loader"],
+                },
+              ],
+            },
+            plugins: [
+              // new webpack.ProvidePlugin({
+              //   $: "jquery",
+              //   jQuery: "jquery",
+              // }),
+              // make sure to include the plugin!
+              // new VueLoaderPlugin(),
+            ],
+          },
+          webpack
+        )
+      )
+      .pipe(
+        rename(function (path) {
+          // Updates the object in-place
+          path.basename = "client";
+        })
+      )
+      .pipe(dest(path.join(destination, "./js")));
 }
 
-// The `clean` function is not exported so it can be considered a private task.
-// It can still be used within the `series()` composition.
-function empty() {
-  // body omitted
-  return src("./build", { read: false }).pipe(clean());
-}
+const destination = path.join(__dirname, "./dist");
 
-function configs() {
-  return src(["./configs/*.*", "./configs/.htaccess"]).pipe(dest(buildFolder));
-}
-
-const build = series(
-  buildEngine(buildFolder),
-  buildTemplateRetro(buildFolder),
-  buildTemplateModern(buildFolder),
-  configs
+// exports.build = build;
+exports.default = series(
+  // buildStyles(templatePath),
+  buildClientJs(destination)
 );
-
-exports.build = build;
-exports.default = series(createDir, empty, build);

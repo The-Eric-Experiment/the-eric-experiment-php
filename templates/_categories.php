@@ -1,4 +1,9 @@
 <?php
 $first = true;
 foreach ($categories as $id => $category) : 
-?><font size="-1"><?php if (!$first): ?>&nbsp;|&nbsp;<?php endif; $first = false;?><a href="/category?id=<?= $category->id ?>"><?= $this->e($category->name) ?></a></font><?php endforeach; ?>
+?>
+<?php if (!$first): ?>
+    <font size="-1"> | </font>
+    <?php endif; $first = false;?>
+    <b><a href="/category?id=<?= $category->id ?>"><?= $this->text($category->name, ['face' => 'arial', 'size' => '-1', 'bold' => true]) ?></a>
+<?php endforeach; ?>

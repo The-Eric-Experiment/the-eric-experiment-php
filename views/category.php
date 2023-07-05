@@ -1,6 +1,8 @@
 <?php
 require_once 'engine/load.php';
 
+$page = $_GET["page"] ? intval($_GET["page"]) + 1 : 1;
+
 $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($parsedUrl, $query);
 $id = $query["id"];
@@ -18,4 +20,7 @@ templateData([
     '_layout' => ['name' => $category->name],
 ]);
 
-render('category', ['name' => $category->name]);
+render('category', [
+    'name' => $category->name,
+    'page' => $page
+]);
