@@ -1,5 +1,5 @@
 <?php
-require_once 'engine/load.php';
+require_once __DIR__ . '/../engine/load.php';
 
 $page = $_GET["page"] ? intval($_GET["page"]) + 1 : 1;
 
