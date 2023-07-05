@@ -17,7 +17,7 @@ $pagination = createPagination(function ($offset) use ($id) {
 
 templateData([
     '_post-list' => $pagination,
-    '_layout' => ['name' => $category->name],
+    '_layout' => ['title' => $category->name],
 ]);
 
 render('category', [

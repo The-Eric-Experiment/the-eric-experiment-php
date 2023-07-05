@@ -48,6 +48,10 @@ $currentImage['src'] = ($currentImageDir === '.' ? '' : $currentImageDir . '/') 
 $previousImage = !empty($gallery['images'][$previousImageIndex]) ? "/gallery/{$id}?img={$previousImageIndex}" : null;
 $nextImage = !empty($gallery['images'][$nextImageIndex]) ? "/gallery/{$id}?img={$nextImageIndex}" : null;
 
+templateData([
+    '_layout' => ['title' => $gallery['title']],
+]);
+
 render('gallery', [
     'page_title' => $gallery['title'],
     'page_slug' => $gallery['slug'],

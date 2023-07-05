@@ -1,6 +1,14 @@
+<?php
+$pageTitle = $this->e($site_name);
+if ($title) {
+    $pageTitle .= ' | '.$title;
+}
+?>
+
 <html>
 <head>
-    <title><?= $this->e($site_name) . (!empty($name) ? " - $name" : ""); ?></title>
+    <title><?= $pageTitle; ?></title>
+    <?= $this->section('seo'); ?>
 </head>
 <body bgcolor="#000000" text="#ffffff" link="lime" vlink="#ffbf00" alink="#ffbf00">
     <?php $this->insert('_header') ?>

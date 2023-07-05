@@ -17,7 +17,7 @@ $pagination = createPagination(function ($offset) use ($id) {
 
 templateData([
     '_post-list' => $pagination,
-    '_layout' => ['name' => $tag->name],
+    '_layout' => ['title' => $tag->name],
 ]);
 
 render('tag', [

@@ -15,4 +15,8 @@ $model = array_merge([
     'page' => $page
 ], $pagination);
 
+templateData([
+    '_layout' => ['name' => 'Posts'],
+]);
+
 render('posts', $model);
