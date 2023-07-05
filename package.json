@@ -7,7 +7,7 @@
     "build": "gulp",
     "link-template-modern": "ln -s /development/the-eric-experiment-php/template-modern/modern/ /development/the-eric-experiment-php/blog-engine/templates/",
     "link-template-retro": "ln -s /development/the-eric-experiment-php/template-retro/retro/ /development/the-eric-experiment-php/blog-engine/templates/",
-    "link-contents": "ln -s /development/tee-blog-contents/.temp/ /development/the-eric-experiment-php/blog-engine/contents",
+    "link-contents": "ln -s /development/tee-blog-contents/.temp/ /development/the-eric-experiment-php/contents",
     "build-dev": "gulp --gulpfile gulpfile.dev.js"
   },
   "repository": {
@@ -22,6 +22,8 @@
   "homepage": "https://github.com/ericmackrodt/the-eric-experiment-php#readme",
   "dependencies": {
     "copyfiles": "^2.4.1",
+    "css-loader": "^6.8.1",
+    "fslightbox": "^3.4.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-cli": "^2.3.0",
@@ -30,10 +32,10 @@
     "gulp-rename": "^2.0.0",
     "gulp-rimraf": "^1.0.0",
     "gulp-sass": "^5.0.0",
-    "jquery": "^3.6.0",
-    "magnific-popup": "^1.1.0",
     "rimraf": "^3.0.2",
     "sass": "^1.42.1",
+    "style-loader": "^3.3.3",
+    "uuid": "^9.0.0",
     "webpack": "^5.53.0",
     "webpack-stream": "^7.0.0"
   }

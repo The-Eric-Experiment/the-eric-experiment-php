@@ -1,0 +1,1 @@
+<img src="/public/nothing.gif" <?= !empty($vertical) && $vertical === true ? 'height' : 'width'; ?>="<?= !empty($space) ? $space : "4" ?>" <?= !empty($vertical) && $vertical === true ? 'width' : 'height'; ?>="1">
