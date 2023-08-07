@@ -1,6 +1,6 @@
 <?php
-require_once 'engine/load.php';
-require_once 'engine/http.php';
+require_once __DIR__ . '/../engine/load.php';
+require_once __DIR__ . '/../engine/http.php';
 
 session_start();
 

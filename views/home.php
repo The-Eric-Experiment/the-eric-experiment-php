@@ -1,6 +1,6 @@
 <?php
 
-require_once 'engine/load.php';
+require_once __DIR__ . '/../engine/load.php';
 // Get site news
 require_once joinPaths(__DIR__, '..', CONFIG['contents-folder'], 'site-news.php');
 
