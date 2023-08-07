@@ -25,7 +25,7 @@ RUN apk --no-cache --update add \
     php81-sqlite3 \
     php81-pdo_sqlite \
     # php81-phar \
-    # php81-session \
+    php81-session \
     # php81-xml \
     && mkdir /htdocs
 
