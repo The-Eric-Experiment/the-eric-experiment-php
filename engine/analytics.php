@@ -1,5 +1,7 @@
 <?php
 
+$analytics_service_url = getenv('ANALYTICS_SERVICE_URL', true) ?: getenv('ANALYTICS_SERVICE_URL');
+
 function getRemoteIP()
 {
   if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {
@@ -65,7 +67,7 @@ function trackEvent(string $event_name, $props = false)
   // $documentPath = $parsedUrl["path"];
   // $documentQuery = $parsedUrl["query"] ?? "";
   $documentHost = $parsedUrl["host"];
-  $event_url = 'http://tinylytics:8099/api/event';
+  $event_url = 'http://'.$analytics_service_url.'/api/event';
 
   $additional_headers = array(
     "User-Agent: {$userAgent}",
