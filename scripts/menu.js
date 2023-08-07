@@ -175,6 +175,8 @@ function generateItem(itemData) {
   let className = "new-menu-item";
   const { icon, label, href } = itemData;
 
+  console.log(icon);
+
   if (
     location.pathname.toLowerCase() === href.toLowerCase() ||
     (href !== "/" &&
@@ -188,7 +190,11 @@ function generateItem(itemData) {
   divMenuItem.title = label;
 
   divMenuItem.innerHTML = `
-        ${icon ? `<img class="default-icon" src="${icon}" alt="icon">` : ""}
+        ${
+          icon
+            ? `<img class="default-icon" src="/contents/${icon}" alt="icon">`
+            : ""
+        }
         ${label ? `<span>${label}</span>` : ""}`;
 
   return divMenuItem;

@@ -27,9 +27,6 @@
     <?php if (!empty($item['path'])) :?>
         <?php 
             $path = $item['path'];
-            if ($path !== '/') {
-                $path = "/page$path";
-            }
         ?>
     <a data-menu-item="true" data-menu-icon="<?= !empty($item['icon']) ? $item['icon'] : ''; ?>" data-menu-label="<?= !empty($item['label']) ? $item['label'] : ''; ?>" href="<?= $path; ?>" target="_top"<?php if (!empty($item['image_on'])) : ?>
             onmouseover="changeImages('image<?= $i + 1; ?>','image<?= $i + 1; ?>on')"
