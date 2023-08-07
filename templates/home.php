@@ -31,6 +31,7 @@
                 <br>
                 <a href="/windows3x/essentialsoftware#mirc591"><img src="/public/mircban.gif" border="0"></a>
                 <a href="http://www.theoldnet.com/#frombadge" title="Are you tired of this new Internet yet? Time to Get TheOldNet!" target="_blank"><img src="//theoldnet.com/images/theoldnetanimblur2.gif" width="88" height="31" border=0></a>
+                <a href="HTTP://ucanet.net"><img src="/public/ucabtn.gif" border="0"></a>
             </p>
             <img src="/public/raptor_walk_md_clr.gif" alt="raptor">
         </td>
