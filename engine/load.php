@@ -6,7 +6,6 @@ define('CONFIG', $config);
 
 try {
     require __DIR__ . '/../vendor/autoload.php';
-    require 'analytics.php';
     require 'helpers.php';
     require 'exceptions.php';
     require 'browser-selector.php';

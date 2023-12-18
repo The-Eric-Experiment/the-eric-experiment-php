@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../engine/load.php';
+require_once __DIR__ . '/../engine/analytics.php';
 $config = require __DIR__.'/../config.php';
 
 // Check if request is HTTPS or HTTP
