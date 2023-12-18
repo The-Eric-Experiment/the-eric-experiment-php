@@ -79,3 +79,23 @@ function getNormalizedUA($ua)
 
   return "$beginning ($deets) {$engine}/20100101 $browser_name/{$uaResult->browser->version->toString()}";
 }
+
+function getPostParam(string $name, string $default = null)
+{
+    $val = $_POST[$name] ?? null;
+    if (!$val) {
+        return $default;
+    }
+
+    return strip_tags($val);
+}
+
+function getParam(string $name, string $default = null)
+{
+    $val = $_GET[$name] ?? null;
+    if (!$val) {
+        return $default;
+    }
+
+    return strip_tags($val);
+}
