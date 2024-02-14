@@ -7,7 +7,7 @@
     ?>
     <a data-fslightbox="<?= $id; ?>" href="/gallery/<?= $id; ?>?img=<?= $i; ?>"><img src="<?= $new_path; ?>" border="0" /></a><img src="/public/nothing.gif" width="5" height="90" border="0">
     
-    <?php if (($i + 1) % 7 == 0) : ?>
+    <?php if (($i + 1) % 4 == 0) : ?>
       <br>
       <?= $this->horizontal_space(); ?><br>
     <?php endif; ?>
