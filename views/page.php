@@ -6,11 +6,11 @@ require_once __DIR__ . '/../engine/analytics.php';
 $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $path_components = explode('/', $path);
 
-if (count($path_components) <= 1) {
+if (count($path_components) <= 0) {
     die;
 }
 
-$key = implode('/', array_slice($path_components, 1));
+$key = implode('/', array_slice($path_components, 0));
 
 if (!pageExists($key)) {
     header("HTTP/1.0 404 Not Found");

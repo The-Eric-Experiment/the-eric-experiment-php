@@ -8,6 +8,11 @@ RewriteRule ^ - [L]
 RewriteCond %{DOCUMENT_ROOT}/views/$1.php -f
 RewriteRule ^([^/]+) /views/$1.php [L]
 
+# Route the request to page.php if the first segment does not correspond to a file
+RewriteCond %{DOCUMENT_ROOT}/views/$1.php !-f
+RewriteCond %{DOCUMENT_ROOT}/views/page.php -f
+RewriteRule ^([^/]+) /views/page.php [L]
+
 # Redirect to custom 404 page if the file does not exist
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
