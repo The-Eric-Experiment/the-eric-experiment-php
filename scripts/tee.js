@@ -8,6 +8,7 @@ import { loadModernImages } from "./images";
 import "./menu";
 import "./no-retro";
 import { loadYoutubeEmbeds } from "./youtube";
+import "./bars";
 
 loadYoutubeEmbeds();
 loadModernImages();

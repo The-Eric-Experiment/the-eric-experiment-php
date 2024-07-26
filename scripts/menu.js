@@ -175,8 +175,6 @@ function generateItem(itemData) {
   let className = "new-menu-item";
   const { icon, label, href } = itemData;
 
-  console.log(icon);
-
   if (
     location.pathname.toLowerCase() === href.toLowerCase() ||
     (href !== "/" &&

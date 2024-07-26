@@ -7,7 +7,7 @@
                 </a>
             </td>
             <td align="right" valign="top">
-                <table border="0" cellspacing="0" cellpadding="0" height="100%">
+                <table border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td valign="top">
                             <a href="https://www.patreon.com/TheEricExperiment" target="_blank">
@@ -35,7 +35,8 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" data-menu-container="true"><?= $this->insert('_menu') ?><br><img src="/contents/public/orange-dot.gif" width="700" height="1"></td>
+            <td colspan="2" data-menu-container="true"><?= $this->insert('_menu') ?><br><img
+                    src="/contents/public/orange-dot.gif" width="700" height="1"></td>
         </tr>
     </table>
 </center>

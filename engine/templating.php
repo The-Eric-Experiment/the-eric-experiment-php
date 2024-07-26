@@ -1,7 +1,7 @@
 <?php
 
 // Create new Plates engine
-$templates = new \League\Plates\Engine(__DIR__.'/../templates');
+$templates = new \League\Plates\Engine(__DIR__ . '/../templates');
 
 require_once joinPaths(__DIR__, '..', CONFIG['contents-folder'], 'main-menu.php');
 
@@ -17,13 +17,14 @@ $templates->addData(['site_name' => CONFIG['site-name']], '_layout');
 $templates->addData(['categories' => $categories], '_categories');
 $templates->addData(['tags' => $tags], '_tags');
 
-$templates->addFolder('posts', joinPaths(__DIR__,'..',CONFIG['contents-folder'],'/posts'), true);
-$templates->addFolder('pages', joinPaths(__DIR__,'..',CONFIG['contents-folder'],'/pages'), true);
+$templates->addFolder('posts', joinPaths(__DIR__, '..', CONFIG['contents-folder'], '/posts'), true);
+$templates->addFolder('pages', joinPaths(__DIR__, '..', CONFIG['contents-folder'], '/pages'), true);
 
-function fixHtml($html) {
+function fixHtml($html)
+{
     // Leave script and style content untouched
     $unprocessedParts = [];
-    $html = preg_replace_callback('/<script\b[^>]*>.*?<\/script>|<style\b[^>]*>.*?<\/style>/si', function($matches) use (&$unprocessedParts) {
+    $html = preg_replace_callback('/<script\b[^>]*>.*?<\/script>|<style\b[^>]*>.*?<\/style>/si', function ($matches) use (&$unprocessedParts) {
         $placeholder = '##' . count($unprocessedParts) . '##';
         $unprocessedParts[] = $matches[0];
         return $placeholder;
@@ -37,7 +38,7 @@ function fixHtml($html) {
     $html = preg_replace('/(?<=>)[\s\n]+(\S)/', ' $1', $html);
 
     // Restore script and style content
-    $html = preg_replace_callback('/##(\d+)##/', function($matches) use ($unprocessedParts) {
+    $html = preg_replace_callback('/##(\d+)##/', function ($matches) use ($unprocessedParts) {
         return $unprocessedParts[$matches[1]];
     }, $html);
 
@@ -45,14 +46,16 @@ function fixHtml($html) {
 }
 
 
-function templateData($args) {
+function templateData($args)
+{
     global $templates;
     foreach ($args as $name => $data) {
         $templates->addData($data, $name);
     }
 }
 
-function render($template, $model) {
+function render($template, $model)
+{
     global $templates;
     $rendered = $templates->render($template, $model);
     echo fixHtml($rendered);
@@ -81,5 +84,5 @@ $templates->registerFunction('horizontal_space', function ($space = 4) use ($tem
 });
 
 $templates->registerFunction('hline', function ($topBr = true) use ($templates) {
-   return  $templates->render('_line', ['top_br'=>$topBr]);
+    return $templates->render('_line', ['top_br' => $topBr]);
 });
