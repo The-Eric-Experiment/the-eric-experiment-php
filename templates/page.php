@@ -1,7 +1,5 @@
 <?php $this->layout('_layout', ['title' => $this->e($title)]); ?>
 
-<img src="/public/nothing.gif" width="1" height="5"><br><img src="/public/black_pixel.gif" width="100%" height="1"><br><img src="/public/nothing.gif" width="1" height="5"><br>
-
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
   <tr>
     <?php if (!empty($this->section('left-content'))) : ?>

@@ -10,9 +10,8 @@ if ($title) {
     <title><?= $pageTitle; ?></title>
     <?= $this->section('seo'); ?>
 </head>
-<body bgcolor="#000000" text="#ffffff" link="lime" vlink="#ffbf00" alink="#ffbf00">
+<body bgcolor="#000000" background="/public/dark-wood.gif" text="#ffffff" link="lime" vlink="#ffbf00" alink="#ffbf00">
     <?php $this->insert('_header') ?>
-    <br>
     <?=$this->section('content')?>
     <center>
         <br><img src="/public/nothing.gif" height="4"><br>

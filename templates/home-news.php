@@ -9,7 +9,7 @@
             <?= $this->horizontal_space() ?>
             </td>
             <td valign="middle">
-                <font face="Arial,Microsoft Sans Serif" size="3"><b>Extra!</b></font>
+                <font face="Arial, Helvetica, Microsoft Sans Serif" size="3"><b>Extra!</b></font>
             </td>
         </tr>
     </table>

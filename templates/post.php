@@ -24,12 +24,9 @@
 <?php $this->end(); ?>
 <img src="/public/nothing.gif" width="1" height="5"><br><img src="/public/black_pixel.gif" width="100%" height="1"><br><img src="/public/nothing.gif" width="1" height="5"><br>
 
-<font size="5">
-  <b><?= $data['title']; ?></b>
-</font><br>
-<img src="/public/nothing.gif" width="1" height="5"><br>
-<img src="/public/black_pixel.gif" width="100%" height="1"><br>
-<img src="/public/nothing.gif" width="1" height="10"><br>
+<h1>
+  <?= $data['title']; ?>
+</h1>
 <b>Published: </b><?= $this->e($data['date']); ?>
 <br />
 <b>Tags: </b>

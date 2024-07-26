@@ -1,7 +1,7 @@
 <?php
     $size = empty($size) ? "" : " size=\"$size\"";
     if (!empty($face) && $face === 'arial') {
-        $face = 'face="Arial,Microsoft Sans Serif"';
+        $face = 'face="Arial, Helvetica, Microsoft Sans Serif"';
     } else if (!empty($face)) {
         $face = "face=\"$face\"";
     } else {
