@@ -1,5 +1,13 @@
 RewriteEngine On
 
+# Sub-domain to sub-site.php redirection
+# Exclude www subdomain
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+# Capture the subdomain
+RewriteCond %{HTTP_HOST} ^([a-zA-Z0-9-]+)\.ericexperiment\.com$ [NC]
+# Redirect to /views/sub-site.php and pass the subdomain as a query parameter
+RewriteRule ^(.*)$ /views/sub-site.php?subdomain=%1 [L,NC,QSA]
+
 # If the request URI ends with a file extension, serve as-is
 RewriteCond %{REQUEST_URI} \.[a-zA-Z0-9]{2,5}$
 RewriteRule ^ - [L]
