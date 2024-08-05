@@ -1,21 +1,19 @@
 RewriteEngine On
 
-RewriteCond %{HTTP_HOST} ^([a-zA-Z0-9-]+)\.ericexperiment\.com$ [NC]
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ /views/sub-site.php?subdomain=%1 [L,NC,QSA]
-
+# If the request URI ends with a file extension, serve as-is
 RewriteCond %{REQUEST_URI} \.[a-zA-Z0-9]{2,5}$
 RewriteRule ^ - [L]
 
-RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,5}$
-RewriteCond %{DOCUMENT_ROOT}/views/%1.php -f
-RewriteRule ^([^/]+)$ /views/$1.php [L]
+# Route the request to the corresponding PHP file in the views directory
+RewriteCond %{DOCUMENT_ROOT}/views/$1.php -f
+RewriteRule ^([^/]+) /views/$1.php [L]
 
-RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,5}$
-RewriteCond %{DOCUMENT_ROOT}/views/%1.php !-f
+# Route the request to page.php if the first segment does not correspond to a file
+RewriteCond %{DOCUMENT_ROOT}/views/$1.php !-f
 RewriteCond %{DOCUMENT_ROOT}/views/page.php -f
-RewriteRule ^([^/]+)$ /views/page.php [L]
+RewriteRule ^([^/]+) /views/page.php [L]
 
+# Redirect to custom 404 page if the file does not exist
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ /views/not-found.php [L]
