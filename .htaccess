@@ -3,7 +3,7 @@ RewriteEngine On
 # Rewrite subdomains
 RewriteCond %{HTTP_HOST} !^www\.ericexperiment\.com [NC]
 RewriteCond %{HTTP_HOST} ^([^.]+)\.ericexperiment\.com [NC]
-RewriteRule ^ /views/sub-site.php [L]
+RewriteRule ^ /views/sub-site.php [END]
 
 # If the request URI ends with a file extension, serve as-is
 RewriteCond %{REQUEST_URI} \.[a-zA-Z0-9]{2,5}$
