@@ -9,6 +9,7 @@ import "./menu";
 import "./no-retro";
 import { loadYoutubeEmbeds } from "./youtube";
 import "./bars";
+import "./webamp";
 
 loadYoutubeEmbeds();
 loadModernImages();
