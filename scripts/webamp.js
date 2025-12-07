@@ -34,7 +34,7 @@ function loadWebamp(callback) {
       timeout = setTimeout(() => {
         observer.disconnect();
         const script = document.createElement("script");
-        script.src = "https://unpkg.com/webamp";
+        script.src = "/public/js/webamp.bundle.min.js";
         script.onload = callback;
         script.onerror = function () {
           console.error("Failed to load Webamp script.");
@@ -55,20 +55,22 @@ loadWebamp(function () {
       const url = tr.dataset.url?.replace(/\.rpm$/, ".mp3");
 
       if (!url) {
-        return []
+        return [];
       }
-      
-      return [{
-        metaData: {
-          artist: tr.dataset.artist,
-          title: tr.dataset.title,
-          duration:
-            typeof tr.dataset.duration === "string"
-              ? parseFloat(tr.dataset.duration)
-              : tr.dataset.duration,
+
+      return [
+        {
+          metaData: {
+            artist: tr.dataset.artist,
+            title: tr.dataset.title,
+            duration:
+              typeof tr.dataset.duration === "string"
+                ? parseFloat(tr.dataset.duration)
+                : tr.dataset.duration,
+          },
+          url,
         },
-        url,
-      }];
+      ];
     });
   });
 
