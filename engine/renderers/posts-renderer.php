@@ -1,6 +1,6 @@
 <?php
 return function () use ($templates) {
-  $page = $_GET["page"] ? intval($_GET["page"]) + 1 : 1;
+  $page = isset($_GET["page"]) && $_GET["page"] ? intval($_GET["page"]) + 1 : 1;
 
   $pagination = createPagination(function ($offset) {
     $current_items = getDBPosts($offset, PAGE_LIMIT);

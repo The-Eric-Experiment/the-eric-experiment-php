@@ -1,4 +1,4 @@
-<?php $this->layout('_layout', []) ?>
+<?php $this->layout('_layout', ['title' => null]) ?>
 <?= $this->vertical_space(12); ?><br />
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
     <tr>

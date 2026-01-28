@@ -1,10 +1,10 @@
 {
     "require": {
-        "league/plates": "^3.4",
-        "pecee/simple-router": "^4.3.6.1",
-        "spatie/yaml-front-matter": "^2.0",
-        "ua-parser/uap-php": "^3.9",
-        "matomo/device-detector": "^5.0",
+        "league/plates": "^3.6",
+        "pecee/simple-router": "^5.4",
+        "spatie/yaml-front-matter": "^2.1",
+        "ua-parser/uap-php": "^3.10",
+        "matomo/device-detector": "^6.5",
         "whichbrowser/parser": "^2.1"
     }
 }

@@ -1,4 +1,4 @@
-<?php $this->layout('_layout', ['title' => $this->e($name)]); ?>
+<?php $this->layout('_layout', ['title' => isset($name) ? $this->e($name) : $this->e($gallery['title'])]); ?>
 <center>
 <img src="/public/nothing.gif" width="1" height="5"><br><img src="/public/black_pixel.gif" width="100%" height="1"><br><img src="/public/nothing.gif" width="1" height="5"><br>
 <font size="2">
@@ -22,6 +22,9 @@
   <?php endif; ?><br>
   <img src="/public/nothing.gif" width="1" height="5"><br>
   <img src="<?= $currentImage['src']; ?>"><br>
+  <?php if ($currentImage['text']) : ?>
+    <p><b><?= $currentImage['text']; ?></b></p>
+  <?php endif; ?>
   <img src="/public/nothing.gif" width="1" height="5"><br>
   <?php if ($previousImage != null) : ?>
     <a href="<?= $previousImage; ?>"><img src="/public/ham_prev.gif" border="0"></a>

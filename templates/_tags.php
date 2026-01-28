@@ -4,7 +4,7 @@
             <img src="/public/tag.gif">
         </td>
         <td>
-        <?= $this->vertical_space() ?>
+            <?= $this->vertical_space() ?>
         </td>
         <td valign="middle">
             <?= $this->text('Tags', ['size' => '3', 'face' => 'arial', 'bold' => true]) ?>
@@ -12,17 +12,17 @@
     </tr>
 </table>
 <img src="/public/linecolor.gif" width="100%" height="2">
-    <br>
-    <?= $this->vertical_space() ?>
+<br>
+<?= $this->vertical_space() ?>
 <?php
-$display_tags = array_filter($tags, function ($item) { return $item->cnt > 1; });
+$display_tags = array_filter($tags, function ($item) {
+    return $item->cnt > 1;
+});
 $total_tags = count($display_tags);
-
-for ($index = 0; $index < $total_tags; $index++) {
-    $tag = $display_tags[$index];
-    echo "<a href='/tag?id={$tag->id}'>" . $this->e($tag->name) . " ({$tag->cnt})</a>";
-    if ($index < $total_tags - 1) {
-        echo "&nbsp;&nbsp;";
-    }
-}
 ?>
+
+<?php for ($index = 0; $index < $total_tags; $index++) { ?>
+    <?php $tag = $display_tags[$index]; ?>
+    <a href='/tag?id=<?= $tag->id ?>'><?= $this->e($tag->name) ?>&nbsp;(<?= $tag->cnt ?>)</a>
+    <?php if ($index < $total_tags - 1) { ?>&nbsp;<?php } ?>
+<?php } ?>

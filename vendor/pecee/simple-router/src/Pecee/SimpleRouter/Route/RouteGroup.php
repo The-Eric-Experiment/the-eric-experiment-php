@@ -7,11 +7,12 @@ use Pecee\SimpleRouter\Handlers\IExceptionHandler;
 
 class RouteGroup extends Route implements IGroupRoute
 {
-    protected $urlRegex = '/^%s\/?/u';
-    protected $prefix;
-    protected $name;
-    protected $domains = [];
-    protected $exceptionHandlers = [];
+    protected string $urlRegex = '/^%s\/?/u';
+    protected ?string $prefix = null;
+    protected ?string $name = null;
+    protected array $domains = [];
+    protected array $exceptionHandlers = [];
+    protected bool $mergeExceptionHandlers = true;
 
     /**
      * Method called to check if a domain matches
@@ -21,7 +22,7 @@ class RouteGroup extends Route implements IGroupRoute
      */
     public function matchDomain(Request $request): bool
     {
-        if ($this->domains === null || count($this->domains) === 0) {
+        if (count($this->domains) === 0) {
             return true;
         }
 
@@ -32,10 +33,11 @@ class RouteGroup extends Route implements IGroupRoute
                 return true;
             }
 
-            $parameters = $this->parseParameters($domain, $request->getHost(), '.*');
+            $parameters = $this->parseParameters($domain, $request->getHost(), $request, '.*');
 
             if ($parameters !== null && count($parameters) !== 0) {
                 $this->parameters = $parameters;
+
                 return true;
             }
         }
@@ -58,7 +60,7 @@ class RouteGroup extends Route implements IGroupRoute
 
         if ($this->prefix !== null) {
             /* Parse parameters from current route */
-            $parameters = $this->parseParameters($this->prefix, $url);
+            $parameters = $this->parseParameters($this->prefix, $url, $request);
 
             /* If no custom regular expression or parameters was found on this route, we stop */
             if ($parameters === null) {
@@ -72,11 +74,11 @@ class RouteGroup extends Route implements IGroupRoute
         $parsedPrefix = $this->prefix;
 
         foreach ($this->getParameters() as $parameter => $value) {
-            $parsedPrefix = str_ireplace('{' . $parameter . '}', $value, $parsedPrefix);
+            $parsedPrefix = str_ireplace('{' . $parameter . '}', (string)$value, (string)$parsedPrefix);
         }
 
         /* Skip if prefix doesn't match */
-        if ($this->prefix !== null && stripos($url, $parsedPrefix) === false) {
+        if ($this->prefix !== null && stripos($url, rtrim($parsedPrefix, '/') . '/') === false) {
             return false;
         }
 
@@ -175,6 +177,29 @@ class RouteGroup extends Route implements IGroupRoute
     }
 
     /**
+     * When enabled group will overwrite any existing exception-handlers.
+     *
+     * @param bool $merge
+     * @return static
+     */
+    public function setMergeExceptionHandlers(bool $merge): IGroupRoute
+    {
+        $this->mergeExceptionHandlers = $merge;
+
+        return $this;
+    }
+
+    /**
+     * Returns true if group should overwrite existing exception-handlers.
+     *
+     * @return bool
+     */
+    public function getMergeExceptionHandlers(): bool
+    {
+        return $this->mergeExceptionHandlers;
+    }
+
+    /**
      * Merge with information from another route.
      *
      * @param array $settings
@@ -187,11 +212,15 @@ class RouteGroup extends Route implements IGroupRoute
             $this->setPrefix($settings['prefix'] . $this->prefix);
         }
 
+        if (isset($settings['mergeExceptionHandlers']) === true) {
+            $this->setMergeExceptionHandlers($settings['mergeExceptionHandlers']);
+        }
+
         if ($merge === false && isset($settings['exceptionHandler']) === true) {
             $this->setExceptionHandlers((array)$settings['exceptionHandler']);
         }
 
-        if ($merge === false && isset($settings['domain']) === true) {
+        if (isset($settings['domain']) === true) {
             $this->setDomains((array)$settings['domain']);
         }
 

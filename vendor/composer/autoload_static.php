@@ -50,7 +50,6 @@ class ComposerStaticInit1093d93fb096fbd3268469b2a2addf2a
         'WhichBrowser\\' => 
         array (
             0 => __DIR__ . '/..' . '/whichbrowser/parser/src',
-            1 => __DIR__ . '/..' . '/whichbrowser/parser/tests/src',
         ),
         'UAParser\\' => 
         array (

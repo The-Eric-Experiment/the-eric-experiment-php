@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../engine/load.php';
 require_once __DIR__ . '/../engine/analytics.php';
 
-$page = $_GET["page"] ? intval($_GET["page"]) + 1 : 1;
+$page = isset($_GET["page"]) && $_GET["page"] ? intval($_GET["page"]) + 1 : 1;
 
 $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($parsedUrl, $query);

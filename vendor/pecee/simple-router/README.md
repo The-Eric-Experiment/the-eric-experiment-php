@@ -36,11 +36,12 @@ You can donate any amount of your choice by [clicking here](https://www.paypal.c
 		- [Available methods](#available-methods)
 		- [Multiple HTTP-verbs](#multiple-http-verbs)
 	- [Route parameters](#route-parameters)
-		- [Required parameters](#required-parameters)
-		- [Optional parameters](#optional-parameters)
-		- [Regular expression constraints](#regular-expression-constraints)
-		- [Regular expression route-match](#regular-expression-route-match)
-		- [Custom regex for matching parameters](#custom-regex-for-matching-parameters)
+        - [Required parameters](#required-parameters)
+        - [Optional parameters](#optional-parameters)
+        - [Including slash in parameters](#including-slash-in-parameters)
+        - [Regular expression constraints](#regular-expression-constraints)
+        - [Regular expression route-match](#regular-expression-route-match)
+        - [Custom regex for matching parameters](#custom-regex-for-matching-parameters)
 	- [Named routes](#named-routes)
 		- [Generating URLs To Named Routes](#generating-urls-to-named-routes)
 	- [Router groups](#router-groups)
@@ -62,6 +63,7 @@ You can donate any amount of your choice by [clicking here](https://www.paypal.c
 - [ExceptionHandlers](#exceptionhandlers)
     - [Handling 404, 403 and other errors](#handling-404-403-and-other-errors)
 	- [Using custom exception handlers](#using-custom-exception-handlers)
+		- [Prevent merge of parent exception-handlers](#prevent-merge-of-parent-exception-handlers)
 - [Urls](#urls)
     - [Get the current url](#get-the-current-url)
  	- [Get by name (single route)](#get-by-name-single-route)
@@ -83,7 +85,7 @@ You can donate any amount of your choice by [clicking here](https://www.paypal.c
     - [Registering new event](#registering-new-event)
     - [Custom EventHandlers](#custom-eventhandlers)
 - [Advanced](#advanced)
-	- [Disable multiple route rendering](#disable-multiple-route-rendering)
+	- [Multiple route rendering](#multiple-route-rendering)
 	- [Restrict access to IP](#restrict-access-to-ip)
 	- [Setting custom base path](#setting-custom-base-path)
 	- [Url rewriting](#url-rewriting)
@@ -489,6 +491,28 @@ SimpleRouter::get('/user/{name?}', function ($name = 'Simon') {
 });
 ```
 
+### Including slash in parameters
+
+If you're working with WebDAV services the url could mean the difference between a file and a folder.
+
+For instance `/path` will be considered a file - whereas `/path/` will be considered a folder.
+
+The router can add the ending slash for the last parameter in your route based on the path. So if `/path/` is requested the parameter will contain the value of `path/` and visa versa.
+
+To ensure compatibility with older versions, this feature is disabled by default and has to be enabled by setting 
+the `setSettings(['includeSlash' => true])` or by using setting `setSlashParameterEnabled(true)` for your route.
+
+**Example**
+
+```php
+SimpleRouter::get('/path/{fileOrFolder}', function ($fileOrFolder) {
+	return $fileOrFolder;
+})->setSettings(['includeSlash' => true]);
+```
+
+- Requesting `/path/file` will return the `$fileOrFolder` value: `file`.
+- Requesting `/path/folder/` will return the `$fileOrFolder` value: `folder/`.
+
 ### Regular expression constraints
 
 You may constrain the format of your route parameters using the where method on a route instance. The where method accepts the name of the parameter and a regular expression defining how the parameter should be constrained:
@@ -791,7 +815,7 @@ If you want to store the token elsewhere, please refer to the "Creating custom T
 When you've created your CSRF-verifier you need to tell simple-php-router that it should use it. You can do this by adding the following line in your `routes.php` file:
 
 ```php
-Router::csrfVerifier(new \Demo\Middlewares\CsrfVerifier());
+SimpleRouter::csrfVerifier(new \Demo\Middlewares\CsrfVerifier());
 ```
 
 ## Getting CSRF-token
@@ -807,7 +831,7 @@ csrf_token();
 You can also get the token directly:
 
 ```php
-return Router::router()->getCsrfVerifier()->getTokenProvider()->getToken();
+return SimpleRouter::router()->getCsrfVerifier()->getTokenProvider()->getToken();
 ```
 
 The default name/key for the input-field is `csrf_token` and is defined in the `POST_KEY` constant in the `BaseCsrfVerifier` class.
@@ -893,10 +917,10 @@ class SessionTokenProvider implements ITokenProvider
 Next you need to set your custom `ITokenProvider` implementation on your `BaseCsrfVerifier` class in your routes file:
 
 ```php
-$verifier = new \dscuz\Middleware\CsrfVerifier();
+$verifier = new \Demo\Middlewares\CsrfVerifier();
 $verifier->setTokenProvider(new SessionTokenProvider());
 
-Router::csrfVerifier($verifier);
+SimpleRouter::csrfVerifier($verifier);
 ```
 
 ---
@@ -938,7 +962,7 @@ ExceptionHandler are classes that handles all exceptions. ExceptionsHandlers mus
 
 ## Handling 404, 403 and other errors
 
-If you simply want to catch a 404 (page not found) etc. you can use the `Router::error($callback)` static helper method.
+If you simply want to catch a 404 (page not found) etc. you can use the `SimpleRouter::error($callback)` static helper method.
 
 This will add a callback method which is fired whenever an error occurs on all routes.
 
@@ -946,15 +970,35 @@ The basic example below simply redirect the page to `/not-found` if an `NotFound
 The code should be placed in the file that contains your routes.
 
 ```php
-Router::get('/not-found', 'PageController@notFound');
+SimpleRouter::get('/not-found', 'PageController@notFound');
+SimpleRouter::get('/forbidden', 'PageController@notFound');
 
-Router::error(function(Request $request, \Exception $exception) {
+SimpleRouter::error(function(Request $request, \Exception $exception) {
 
-    if($exception instanceof NotFoundHttpException && $exception->getCode() === 404) {
-        response()->redirect('/not-found');
+    switch($exception->getCode()) {
+        // Page not found
+        case 404:
+            response()->redirect('/not-found');
+        // Forbidden
+        case 403:
+            response()->redirect('/forbidden');
     }
     
 });
+```
+
+The example above will redirect all errors with http-code `404` (page not found) to `/not-found` and `403` (forbidden) to `/forbidden`.
+
+If you do not want a redirect, but want the error-page rendered on the current-url, you can tell the router to execute a rewrite callback like so:
+
+```php
+$request->setRewriteCallback('ErrorController@notFound');
+```
+
+If you will set the correct status for the browser error use:
+
+```php
+SimpleRouter::response()->httpCode(404);
 ```
 
 ## Using custom exception handlers
@@ -992,12 +1036,58 @@ class CustomExceptionHandler implements IExceptionHandler
 			return;
 			
 		}
+		
+		/* Other error */
+		if($error instanceof MyCustomException) {
+
+			$request->setRewriteRoute(
+				// Add new route based on current url (minus query-string) and add custom parameters.
+				(new RouteUrl(url(null, null, []), 'PageController@error'))->setParameters(['exception' => $error])
+			);
+			return;
+			
+		}
 
 		throw $error;
 
 	}
 
 }
+```
+
+You can add your custom exception-handler class to your group by using the `exceptionHandler` settings-attribute.
+`exceptionHandler` can be either class-name or array of class-names.
+
+```php
+SimpleRouter::group(['exceptionHandler' => \Demo\Handlers\CustomExceptionHandler::class], function() {
+
+    // Your routes here
+
+});
+```
+
+### Prevent merge of parent exception-handlers
+
+By default the router will merge exception-handlers to any handlers provided by parent groups, and will be executed in the order of newest to oldest.
+
+If you want your groups exception handler to be executed independently, you can add the `mergeExceptionHandlers` attribute and set it to `false`.
+
+```php
+SimpleRouter::group(['prefix' => '/', 'exceptionHandler' => \Demo\Handlers\FirstExceptionHandler::class, 'mergeExceptionHandlers' => false], function() {
+
+	SimpleRouter::group(['prefix' => '/admin', 'exceptionHandler' => \Demo\Handlers\SecondExceptionHandler::class], function() {
+	
+		// Both SecondExceptionHandler and FirstExceptionHandler will trigger (in that order).
+	
+	});
+	
+	SimpleRouter::group(['prefix' => '/user', 'exceptionHandler' => \Demo\Handlers\SecondExceptionHandler::class, 'mergeExceptionHandlers' => false], function() {
+	
+		// Only SecondExceptionHandler will trigger.
+	
+	});
+
+});
 ```
 
 ---
@@ -1297,7 +1387,7 @@ All event callbacks will retrieve a `EventArgument` object as parameter. This ob
 | `EVENT_RENDER_BOOTMANAGER`  | `bootmanagers`<br>`bootmanager` | Fires before a boot-manager is rendered. |
 | `EVENT_LOAD_ROUTES`         | `routes` | Fires when the router is about to load all routes. |
 | `EVENT_FIND_ROUTE`          | `name` | Fires whenever the `findRoute` method is called within the `Router`. This usually happens when the router tries to find routes that contains a certain url, usually after the `EventHandler::EVENT_GET_URL` event. |
-| `EVENT_GET_URL`             | `name`<br>`parameters`<br>`getParams` | Fires whenever the `Router::getUrl` method or `url`-helper function is called and the router tries to find the route. |
+| `EVENT_GET_URL`             | `name`<br>`parameters`<br>`getParams` | Fires whenever the `SimpleRouter::getUrl` method or `url`-helper function is called and the router tries to find the route. |
 | `EVENT_MATCH_ROUTE`         | `route` | Fires when a route is matched and valid (correct request-type etc). and before the route is rendered. |
 | `EVENT_RENDER_ROUTE`        | `route` | Fires before a route is rendered. |
 | `EVENT_LOAD_EXCEPTIONS`     | `exception`<br>`exceptionHandlers` | Fires when the router is loading exception-handlers. |
@@ -1413,11 +1503,12 @@ class DatabaseDebugHandler implements IEventHandler
 
 # Advanced
 
-## Disable multiple route rendering
+## Multiple route rendering
 
-By default the router will try to execute all routes that matches a given url. To stop the router from executing any further routes any method can return a value.
+If you need multiple routes to be executed on the same url, you can enable this feature by setting `SimpleRouter::enableMultiRouteRendering(true)`
+in your `routes.php` file.
 
-This behavior can be easily disabled by setting `SimpleRouter::enableMultiRouteRendering(false)` in your `routes.php` file. This is the same behavior as version 3 and below.
+This is most commonly used in advanced cases, for example in CMS systems where multiple routes needs to be rendered.
 
 ## Restrict access to IP
 
@@ -1480,7 +1571,7 @@ $eventHandler->register(EventHandler::EVENT_ADD_ROUTE, function(EventArgument $e
 	
 });
 
-TestRouter::addEventHandler($eventHandler);
+SimpleRouter::addEventHandler($eventHandler);
 ```
 
 In the example shown above, we create a new `EVENT_ADD_ROUTE` event that triggers, when a new route is added.
@@ -1651,6 +1742,7 @@ SimpleRouter::setCustomClassLoader(new MyCustomClassLoader());
 php-di support was discontinued by version 4.3, however you can easily add it again by creating your own class-loader like the example below:
 
 ```php
+use Pecee\SimpleRouter\ClassLoader\IClassLoader;
 use Pecee\SimpleRouter\Exceptions\ClassNotFoundHttpException;
 
 class MyCustomClassLoader implements IClassLoader
@@ -1671,19 +1763,14 @@ class MyCustomClassLoader implements IClassLoader
      *
      * @param string $class
      * @return object
-     * @throws NotFoundHttpException
+     * @throws ClassNotFoundHttpException
      */
     public function loadClass(string $class)
     {
-        if (class_exists($class) === false) {
-            throw new NotFoundHttpException(sprintf('Class "%s" does not exist', $class), 404);
+        if ($this->container->has($class) === false) {
+            throw new ClassNotFoundHttpException($class, null, sprintf('Class "%s" does not exist', $class), 404, null);
         }
-
-		try {
-			return $this->container->get($class);
-		} catch (\Exception $e) {
-			throw new NotFoundHttpException($e->getMessage(), (int)$e->getCode(), $e->getPrevious());
-		}
+        return $this->container->get($class);
     }
     
     /**
@@ -1691,15 +1778,11 @@ class MyCustomClassLoader implements IClassLoader
      * @param object $class
      * @param string $method
      * @param array $parameters
-     * @return object
+     * @return string
      */
     public function loadClassMethod($class, string $method, array $parameters)
     {
-		try {
-			return $this->container->call([$class, $method], $parameters);
-		} catch (\Exception $e) {
-			throw new NotFoundHttpException($e->getMessage(), (int)$e->getCode(), $e->getPrevious());
-		}
+        return (string)$this->container->call([$class, $method], $parameters);
     }
 
     /**
@@ -1707,15 +1790,11 @@ class MyCustomClassLoader implements IClassLoader
      *
      * @param Callable $closure
      * @param array $parameters
-     * @return mixed
+     * @return string
      */
     public function loadClosure(callable $closure, array $parameters)
     {
-		try {
-			return $this->container->call($closure, $parameters);
-		} catch (\Exception $e) {
-			throw new NotFoundHttpException($e->getMessage(), (int)$e->getCode(), $e->getPrevious());
-		}
+        return (string)$this->container->call($closure, $parameters);
     }
 }
 ```

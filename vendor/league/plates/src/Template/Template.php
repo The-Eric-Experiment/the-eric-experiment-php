@@ -4,6 +4,7 @@ namespace League\Plates\Template;
 
 use Exception;
 use League\Plates\Engine;
+use League\Plates\Exception\TemplateNotFound;
 use LogicException;
 use Throwable;
 
@@ -108,10 +109,10 @@ class Template
 
     /**
      * Assign or get template data.
-     * @param  array $data
-     * @return mixed
+     * @param array|null $data
+     * @return array|void
      */
-    public function data(array $data = null)
+    public function data(?array $data = null)
     {
         if (is_null($data)) {
             return $this->data;
@@ -126,7 +127,12 @@ class Template
      */
     public function exists()
     {
-        return $this->name->doesPathExist();
+        try {
+            ($this->engine->getResolveTemplatePath())($this->name);
+            return true;
+        } catch (TemplateNotFound $e) {
+            return false;
+        }
     }
 
     /**
@@ -135,7 +141,11 @@ class Template
      */
     public function path()
     {
-        return $this->name->getPath();
+        try {
+            return ($this->engine->getResolveTemplatePath())($this->name);
+        } catch (TemplateNotFound $e) {
+            return $e->paths()[0];
+        }
     }
 
     /**
@@ -148,20 +158,16 @@ class Template
     public function render(array $data = array())
     {
         $this->data($data);
-        unset($data);
-        extract($this->data);
-
-        if (!$this->exists()) {
-            throw new LogicException(
-                'The template "' . $this->name->getName() . '" could not be found at "' . $this->path() . '".'
-            );
-        }
+        $path = ($this->engine->getResolveTemplatePath())($this->name);
 
         try {
             $level = ob_get_level();
             ob_start();
 
-            include $this->path();
+            (function() {
+                extract($this->data);
+                include func_get_arg(0);
+            })($path);
 
             $content = ob_get_clean();
 
@@ -173,12 +179,6 @@ class Template
 
             return $content;
         } catch (Throwable $e) {
-            while (ob_get_level() > $level) {
-                ob_end_clean();
-            }
-
-            throw $e;
-        } catch (Exception $e) {
             while (ob_get_level() > $level) {
                 ob_end_clean();
             }
@@ -361,14 +361,14 @@ class Template
         static $flags;
 
         if (!isset($flags)) {
-            $flags = ENT_QUOTES | (defined('ENT_SUBSTITUTE') ? ENT_SUBSTITUTE : 0);
+            $flags = ENT_QUOTES | ENT_SUBSTITUTE;
         }
 
         if ($functions) {
             $string = $this->batch($string, $functions);
         }
 
-        return htmlspecialchars($string, $flags, 'UTF-8');
+        return htmlspecialchars($string ?? '', $flags, 'UTF-8');
     }
 
     /**

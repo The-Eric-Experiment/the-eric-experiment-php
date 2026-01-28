@@ -7,7 +7,7 @@
     "build": "vite build",
     "link-template-modern": "ln -s /development/the-eric-experiment-php/template-modern/modern/ /development/the-eric-experiment-php/blog-engine/templates/",
     "link-template-retro": "ln -s /development/the-eric-experiment-php/template-retro/retro/ /development/the-eric-experiment-php/blog-engine/templates/",
-    "link-contents": "ln -s /development/tee-blog-contents/.temp/ /development/the-eric-experiment-php/contents",
+    "link-contents": "ln -s /Users/eric/projects/tee-blog-contents/.temp/ /Users/eric/projects/the-eric-experiment-php/contents",
     "build-dev": "vite build --mode development"
   },
   "repository": {

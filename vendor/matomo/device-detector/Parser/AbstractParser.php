@@ -14,6 +14,7 @@ namespace DeviceDetector\Parser;
 
 use DeviceDetector\Cache\CacheInterface;
 use DeviceDetector\Cache\StaticCache;
+use DeviceDetector\ClientHints;
 use DeviceDetector\DeviceDetector;
 use DeviceDetector\Yaml\ParserInterface as YamlParser;
 use DeviceDetector\Yaml\Spyc;
@@ -37,10 +38,22 @@ abstract class AbstractParser
     protected $parserName;
 
     /**
-     * Holds the user agent the should be parsed
+     * Holds the user agent to be parsed
      * @var string
      */
     protected $userAgent;
+
+    /**
+     * Holds the client hints to be parsed
+     * @var ?ClientHints
+     */
+    protected $clientHints = null;
+
+    /**
+     * Contains a list of mappings from names we use to known client hint values
+     * @var array<string, array<string>>
+     */
+    protected static $clientHintMapping = [];
 
     /**
      * Holds an array with method that should be available global
@@ -97,14 +110,14 @@ abstract class AbstractParser
     public const VERSION_TRUNCATION_NONE = -1;
 
     /**
-     * @var CacheInterface
+     * @var CacheInterface|null
      */
-    protected $cache;
+    protected $cache = null;
 
     /**
-     * @var YamlParser
+     * @var YamlParser|null
      */
-    protected $yamlParser;
+    protected $yamlParser = null;
 
     /**
      * parses the currently set useragents and returns possible results
@@ -116,11 +129,50 @@ abstract class AbstractParser
     /**
      * AbstractParser constructor.
      *
-     * @param string $ua
+     * @param string       $ua
+     * @param ?ClientHints $clientHints
      */
-    public function __construct(string $ua = '')
+    public function __construct(string $ua = '', ?ClientHints $clientHints = null)
     {
         $this->setUserAgent($ua);
+        $this->setClientHints($clientHints);
+    }
+
+    /**
+     * Restore useragent from client hints
+     */
+    public function restoreUserAgentFromClientHints(): void
+    {
+        if (null === $this->clientHints) {
+            return;
+        }
+
+        $deviceModel = $this->clientHints->getModel();
+
+        if ('' === $deviceModel) {
+            return;
+        }
+
+        // Restore Android User Agent
+        if ($this->hasUserAgentClientHintsFragment()) {
+            $osVersion = $this->clientHints->getOperatingSystemVersion();
+            $this->setUserAgent((string) \preg_replace(
+                '(Android (?:10[.\d]*; K|1[1-5]))',
+                \sprintf('Android %s; %s', '' !== $osVersion ? $osVersion : '10', $deviceModel),
+                $this->userAgent
+            ));
+        }
+
+        // Restore Desktop User Agent
+        if (!$this->hasDesktopFragment()) {
+            return;
+        }
+
+        $this->setUserAgent((string) \preg_replace(
+            '(X11; Linux x86_64)',
+            \sprintf('X11; Linux x86_64; %s', $deviceModel),
+            $this->userAgent
+        ));
     }
 
     /**
@@ -135,7 +187,7 @@ abstract class AbstractParser
             self::VERSION_TRUNCATION_MAJOR,
             self::VERSION_TRUNCATION_MINOR,
             self::VERSION_TRUNCATION_PATCH,
-        ])
+        ], true)
         ) {
             return;
         }
@@ -151,6 +203,16 @@ abstract class AbstractParser
     public function setUserAgent(string $ua): void
     {
         $this->userAgent = $ua;
+    }
+
+    /**
+     * Sets the client hints to parse
+     *
+     * @param ?ClientHints $clientHints client hints
+     */
+    public function setClientHints(?ClientHints $clientHints): void
+    {
+        $this->clientHints = $clientHints;
     }
 
     /**
@@ -219,14 +281,24 @@ abstract class AbstractParser
     protected function getRegexes(): array
     {
         if (empty($this->regexList)) {
-            $cacheKey        = 'DeviceDetector-' . DeviceDetector::VERSION . 'regexes-' . $this->getName();
-            $cacheKey        = (string) \preg_replace('/([^a-z0-9_-]+)/i', '', $cacheKey);
-            $this->regexList = $this->getCache()->fetch($cacheKey);
+            $cacheKey     = 'DeviceDetector-' . DeviceDetector::VERSION . 'regexes-' . $this->getName();
+            $cacheKey     = (string) \preg_replace('/([^a-z0-9_-]+)/i', '', $cacheKey);
+            $cacheContent = $this->getCache()->fetch($cacheKey);
+
+            if (\is_array($cacheContent)) {
+                $this->regexList = $cacheContent;
+            }
 
             if (empty($this->regexList)) {
-                $this->regexList = $this->getYamlParser()->parseFile(
+                $parsedContent = $this->getYamlParser()->parseFile(
                     $this->getRegexesDirectory() . DIRECTORY_SEPARATOR . $this->fixtureFile
                 );
+
+                if (!\is_array($parsedContent)) {
+                    $parsedContent = [];
+                }
+
+                $this->regexList = $parsedContent;
                 $this->getCache()->save($cacheKey, $this->regexList);
             }
         }
@@ -235,11 +307,68 @@ abstract class AbstractParser
     }
 
     /**
+     * Returns the provided name after applying client hint mappings.
+     * This is used to map names provided in client hints to the names we use.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function applyClientHintMapping(string $name): string
+    {
+        foreach (static::$clientHintMapping as $mappedName => $clientHints) {
+            foreach ($clientHints as $clientHint) {
+                if (\strtolower($name) === \strtolower($clientHint)) {
+                    return $mappedName;
+                }
+            }
+        }
+
+        return $name;
+    }
+
+    /**
      * @return string
      */
     protected function getRegexesDirectory(): string
     {
         return \dirname(__DIR__);
+    }
+
+    /**
+     * Returns if the parsed UA contains the 'Windows NT;' or 'X11; Linux x86_64' fragments
+     *
+     * @return bool
+     *
+     * @throws \Exception
+     */
+    protected function hasDesktopFragment(): bool
+    {
+        $regexExcludeDesktopFragment = \implode('|', [
+            'CE-HTML',
+            ' Mozilla/|Andr[o0]id|Tablet|Mobile|iPhone|Windows Phone|ricoh|OculusBrowser',
+            'PicoBrowser|Lenovo|compatible; MSIE|Trident/|Tesla/|XBOX|FBMD/|ARM; ?([^)]+)',
+        ]);
+
+        return
+            $this->matchUserAgent('(?:Windows (?:NT|IoT)|X11; Linux x86_64)') &&
+            !$this->matchUserAgent($regexExcludeDesktopFragment);
+    }
+
+    /**
+     * Returns if the parsed UA contains the 'Android 10 K;' or Android 10 K Build/` fragment
+     *
+     * @return bool
+     */
+    protected function hasUserAgentClientHintsFragment(): bool
+    {
+        $pattern = '~Android (?:1[0-6][.\d]*; K(?: Build/|[;)])|1[0-6]\)) AppleWebKit~i';
+
+        if (\preg_match($pattern, $this->userAgent)) {
+            return false === \stripos($this->userAgent, 'Telegram-Android/');
+        }
+
+        return false;
     }
 
     /**
@@ -256,7 +385,7 @@ abstract class AbstractParser
         $matches = [];
 
         // only match if useragent begins with given regex or there is no letter before it
-        $regex = '/(?:^|[^A-Z0-9\-_]|[^A-Z0-9\-]_|sprd-|MZ-)(?:' . \str_replace('/', '\/', $regex) . ')/i';
+        $regex = '/(?:^|[^A-Z0-9_-]|[^A-Z0-9-]_|sprd-|MZ-)(?:' . \str_replace('/', '\/', $regex) . ')/i';
 
         try {
             if (\preg_match($regex, $this->userAgent, $matches)) {
@@ -283,8 +412,9 @@ abstract class AbstractParser
     {
         $search  = [];
         $replace = [];
+        $count   = \count($matches);
 
-        for ($nb = 1; $nb <= \count($matches); $nb++) {
+        for ($nb = 1; $nb <= $count; $nb++) {
             $search[]  = '$' . $nb;
             $replace[] = $matches[$nb] ?? '';
         }
@@ -330,6 +460,8 @@ abstract class AbstractParser
      * Method can be used to speed up detections by making a big check before doing checks for every single regex
      *
      * @return ?array
+     *
+     * @throws \Exception
      */
     protected function preMatchOverall(): ?array
     {
@@ -339,7 +471,11 @@ abstract class AbstractParser
         $cacheKey = (string) \preg_replace('/([^a-z0-9_-]+)/i', '', $cacheKey);
 
         if (empty($this->overAllMatch)) {
-            $this->overAllMatch = $this->getCache()->fetch($cacheKey);
+            $overAllMatch = $this->getCache()->fetch($cacheKey);
+
+            if (\is_string($overAllMatch)) {
+                $this->overAllMatch = $overAllMatch;
+            }
         }
 
         if (empty($this->overAllMatch)) {
@@ -351,5 +487,19 @@ abstract class AbstractParser
         }
 
         return $this->matchUserAgent($this->overAllMatch);
+    }
+
+    /**
+     * Compares if two strings equals after lowering their case and removing spaces
+     *
+     * @param string $value1
+     * @param string $value2
+     *
+     * @return bool
+     */
+    protected function fuzzyCompare(string $value1, string $value2): bool
+    {
+        return \str_replace(' ', '', \strtolower($value1)) ===
+            \str_replace(' ', '', \strtolower($value2));
     }
 }

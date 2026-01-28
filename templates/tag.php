@@ -1,4 +1,4 @@
-<?php $this->layout('_layout') ?>
+<?php $this->layout('_layout', ['title' => $name]) ?>
 
 <center>
   <h2>Tag: <?= $this->e($name) ?> - Page <?= $page ?></h2>

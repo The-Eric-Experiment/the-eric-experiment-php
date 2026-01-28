@@ -71,7 +71,12 @@
             <ul>
                 {{ range .Children }}
                 <li class="{{ if $currentPage.IsMenuCurrent "main" . }}selected{{ end }}">
-                    <a href="{{ .URL }}">{{ .Page.Title }}</a>
+                    <a href="{{ .URL }}">
+                        {{ .Page.Title }}
+                        {{ with .Params.badge }}
+                            <sup class="menu-badge">{{ . }}</sup>
+                        {{ end }}
+                    </a>
                 </li>
                 {{ end }}
             </ul>
@@ -98,17 +103,5 @@ $('select.select2').select2().on('change', function(e) {
     window.location.href = pathParts.join("/");
 });
 </script>
-
-{{ if .Site.GoogleAnalytics }}
-    <script>
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','{{ .Site.GoogleAnalytics }}');ga('send','pageview');
-    </script>
-{{ end }}
-
 </body>
 </html>
